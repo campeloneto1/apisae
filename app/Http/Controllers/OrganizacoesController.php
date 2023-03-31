@@ -46,7 +46,7 @@ class OrganizacoesController extends Controller
         $data->cidade_id = $request->cidade_id;   
         $data->complemento = $request->complemento;    
 
-        $data->key = bcripty($request->organizacao_tipo_id.$request->nome);          
+        $data->key = bcrypt($request->organizacao_tipo_id.$request->nome);          
 
         $data->created_by = Auth::id();      
 
@@ -76,7 +76,7 @@ class OrganizacoesController extends Controller
         if(!Auth::user()->perfil->organizacoes){
             return response()->json('Não Autorizado', 401);
         }
-        return $organizaco;
+        return Organizacao::with('pessoas', 'veiculos', 'arquivos')->findOrFail($organizaco->id);
     }
 
     /**
@@ -104,7 +104,7 @@ class OrganizacoesController extends Controller
         $organizaco->cidade_id = $request->cidade_id;   
         $organizaco->complemento = $request->complemento;    
 
-        $organizaco->key = bcripty($request->organizacao_tipo_id.$request->nome);          
+        $organizaco->key = bcrypt($request->organizacao_tipo_id.$request->nome);          
 
         $organizaco->created_by = Auth::id();      
 

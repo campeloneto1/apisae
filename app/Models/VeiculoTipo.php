@@ -14,7 +14,7 @@ class VeiculoTipo extends Model
      *
      * @var string
      */
-    protected $table = 'veiuclos_tipos';
+    protected $table = 'veiculos_tipos';
 
     /**
      * The attributes that are mass assignable.

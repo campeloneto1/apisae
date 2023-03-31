@@ -7,6 +7,7 @@ use App\Models\Log;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class PessoasArquivosController extends Controller
 {
@@ -111,6 +112,8 @@ class PessoasArquivosController extends Controller
         }
                  
          if($pessoas_arquivo->delete()){
+            //Storage::delete('app/public/'.$pessoas_arquivo->nome);
+            unlink(storage_path('app/public/'.$pessoas_arquivo->nome));
             $log = new Log;
             $log->user_id = Auth::id();
             $log->mensagem = 'Excluiu um Arquivo na Pessoa';

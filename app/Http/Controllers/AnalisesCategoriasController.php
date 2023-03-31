@@ -33,7 +33,11 @@ class AnalisesCategoriasController extends Controller
         $data = new AnaliseCategoria;
 
         $data->nome = $request->nome;   
-        $data->gestor = $request->gestor;   
+        $data->gestor = $request->gestor;  
+        $data->tipo = $request->tipo;   
+        $data->previa = $request->previa;  
+        $data->sintese = $request->sintese;  
+        $data->endereco = $request->endereco;  
 
         $data->created_by = Auth::id();      
 
@@ -77,7 +81,11 @@ class AnalisesCategoriasController extends Controller
         $dataold = $analises_categoria;
 
         $analises_categoria->gestor = $request->gestor;     
-        $analises_categoria->nome = $request->nome;   
+        $analises_categoria->nome = $request->nome;  
+        $analises_categoria->tipo = $request->tipo;   
+        $analises_categoria->previa = $request->previa;  
+        $analises_categoria->sintese = $request->sintese;  
+        $analises_categoria->endereco = $request->endereco;  
 
         $analises_categoria->updated_by = Auth::id();      
 

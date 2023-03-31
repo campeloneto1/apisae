@@ -55,4 +55,25 @@ class Veiculo extends Model
         return $this->belongsTo(VeiculoTipo::class);
     }
 
+    public function pessoas()
+    {
+        return $this->belongsToMany(Pessoa::class, 'pessoas_veiculos', 'veiculo_id', 'pessoa_id')->withPivot('id')->orderBy('nome');
+    }
+
+    public function analises()
+    {
+        return $this->belongsToMany(Analise::class, 'analises_veiculos', 'veiculo_id', 'analise_id')->withPivot('id')->orderBy('nome');
+    }
+
+
+    public function organizacoes()
+    {
+        return $this->belongsToMany(Organizacao::class, 'organizacoes_veiculos', 'veiculo_id', 'organizacao_id')->withPivot('id')->orderBy('nome');
+    }
+
+    public function arquivos()
+    {
+        return $this->hasMany(VeiculoArquivo::class, 'veiculo_id')->without('veiculo');
+    }
+
 }

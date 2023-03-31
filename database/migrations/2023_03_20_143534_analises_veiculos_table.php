@@ -24,6 +24,8 @@ return new class extends Migration
             $table->foreignId('updated_by')->nullable()->constrained('users')->onUpdate('cascade')->onDelete('set null');
 
             $table->timestamps();
+
+            $table->unique(['veiculo_id', 'analise_id']);
         });
         Schema::enableForeignKeyConstraints();
     }

@@ -38,11 +38,16 @@ class PessoaArquivo extends Model
      *
      * @var array
      */
-    protected $with = ['pessoa'];
+    protected $with = ['arquivo_tipo', 'pessoa'];
 
     
     public function pessoa()
     {
         return $this->belongsTo(Pessoa::class);
+    }
+
+    public function arquivo_tipo()
+    {
+        return $this->belongsTo(ArquivoTipo::class);
     }
 }

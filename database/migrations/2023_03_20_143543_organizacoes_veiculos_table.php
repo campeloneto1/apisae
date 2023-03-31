@@ -14,8 +14,9 @@ return new class extends Migration
         Schema::disableForeignKeyConstraints();
         Schema::create('organizacoes_veiculos', function (Blueprint $table) {
              $table->id();
+             $table->foreignId('organizacao_id')->nullable()->constrained('organizacoes')->onUpdate('cascade')->onDelete('set null');
             $table->foreignId('veiculo_id')->nullable()->constrained('veiculos')->onUpdate('cascade')->onDelete('set null');
-            $table->foreignId('organizacao_id')->nullable()->constrained('organizacoes')->onUpdate('cascade')->onDelete('set null');
+            
 
             //$table->date('data')->nullable();
             //$table->time('hora')->nullable();
@@ -24,6 +25,8 @@ return new class extends Migration
             $table->foreignId('updated_by')->nullable()->constrained('users')->onUpdate('cascade')->onDelete('set null');
 
             $table->timestamps();
+
+            $table->unique(['veiculo_id', 'organizacao_id']);
         });
         Schema::enableForeignKeyConstraints();
     }

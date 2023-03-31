@@ -15,12 +15,14 @@ return new class extends Migration
         Schema::create('modelos', function (Blueprint $table) {
             $table->id();
             $table->foreignId('marca_id')->nullable()->constrained('marcas')->onUpdate('cascade')->onDelete('set null');
-            $table->string('nome', 50)->unique();
+            $table->string('nome', 50);
 
             $table->foreignId('created_by')->nullable()->constrained('users')->onUpdate('cascade')->onDelete('set null');
             $table->foreignId('updated_by')->nullable()->constrained('users')->onUpdate('cascade')->onDelete('set null');
 
             $table->timestamps();
+
+            $table->unique(['marca_id', 'nome']);
         });
         Schema::enableForeignKeyConstraints();
     }

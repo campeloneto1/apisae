@@ -26,7 +26,7 @@ class SexosController extends Controller
      */
     public function store(Request $request)
     {
-        if(!Auth::user()->perfil->gestor){
+        if(!Auth::user()->perfil->administrador){
             return response()->json('Não Autorizado', 401);
         }
         $data = new Sexo;
@@ -69,7 +69,7 @@ class SexosController extends Controller
      */
     public function update(Request $request, Sexo $sexo)
     {
-        if(!Auth::user()->perfil->gestor){
+        if(!Auth::user()->perfil->administrador){
             return response()->json('Não Autorizado', 401);
         }
         $dataold = $sexo;
@@ -102,7 +102,7 @@ class SexosController extends Controller
      */
     public function destroy(Sexo $sexo)
     {
-        if(!Auth::user()->perfil->gestor){
+        if(!Auth::user()->perfil->administrador){
             return response()->json('Não Autorizado', 401);
         }
                  

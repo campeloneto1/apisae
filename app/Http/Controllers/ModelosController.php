@@ -26,7 +26,7 @@ class ModelosController extends Controller
      */
     public function store(Request $request)
     {
-        if(!Auth::user()->perfil->gestor){
+        if(!Auth::user()->perfil->administrador){
             return response()->json('Não Autorizado', 401);
         }
         $data = new Modelo;
@@ -70,7 +70,7 @@ class ModelosController extends Controller
      */
     public function update(Request $request, Modelo $modelo)
     {
-        if(!Auth::user()->perfil->gestor){
+        if(!Auth::user()->perfil->administrador){
             return response()->json('Não Autorizado', 401);
         }
         $dataold = $modelo;
@@ -104,7 +104,7 @@ class ModelosController extends Controller
      */
     public function destroy(Modelo $modelo)
     {
-        if(!Auth::user()->perfil->gestor){
+        if(!Auth::user()->perfil->administrador){
             return response()->json('Não Autorizado', 401);
         }
                  

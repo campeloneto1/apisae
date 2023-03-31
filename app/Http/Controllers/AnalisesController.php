@@ -19,7 +19,7 @@ class AnalisesController extends Controller
          if(!Auth::user()->perfil->analises){
             return response()->json('Não Autorizado', 401);
         }
-        return Analise::orderBy('date', 'desc')->get();
+        return Analise::orderBy('data', 'desc')->get();
     }
 
     /**
@@ -49,7 +49,7 @@ class AnalisesController extends Controller
         $data->cidade_id = $request->cidade_id;   
         $data->complemento = $request->complemento;    
 
-        $data->key = bcripty($request->analise_tipo_id.$request->analise_categoria_id.$request->data.$request->hora.$request->nome);            
+        $data->key = bcrypt($request->analise_tipo_id.$request->analise_categoria_id.$request->data.$request->hora.$request->nome);            
 
         $data->created_by = Auth::id();      
 
@@ -109,7 +109,7 @@ class AnalisesController extends Controller
         $analise->cidade_id = $request->cidade_id;   
         $analise->complemento = $request->complemento;    
 
-        $analise->key = bcripty($request->analise_tipo_id.$request->analise_categoria_id.$request->data.$request->hora.$request->nome);          
+        $analise->key = bcrypt($request->analise_tipo_id.$request->analise_categoria_id.$request->data.$request->hora.$request->nome);          
 
         $analise->created_by = Auth::id();      
 

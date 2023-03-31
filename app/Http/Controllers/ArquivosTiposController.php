@@ -2,32 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Marca;
+use App\Models\ArquivoTipo;
 use App\Models\Log;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class MarcasController extends Controller
+class ArquivosTiposController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        if(!Auth::user()->perfil->veiculos){
-            return response()->json('Não Autorizado', 401);
-        }
-        return Marca::orderBy('nome', 'asc')->get();
-    }
-
-    /**
-     * Display a listing of the resource.
-     */
-    public function where(Request $request)
-    {
-       
-        return Marca::find($request->id)->modelos()->orderBy('nome', 'asc')->get();
+        
+        return ArquivoTipo::orderBy('nome', 'asc')->get();
     }
 
     /**
@@ -38,22 +27,27 @@ class MarcasController extends Controller
         if(!Auth::user()->perfil->administrador){
             return response()->json('Não Autorizado', 401);
         }
-        $data = new Marca;
+        $data = new ArquivoTipo;
 
-        $data->nome = $request->nome;   
+        $data->nome = $request->nome;  
+        $data->foto = $request->foto;   
+        $data->video = $request->video;  
+        $data->audio = $request->audio;  
+        $data->texto = $request->texto;  
+        $data->pdf = $request->pdf;  
 
         $data->created_by = Auth::id();      
 
         if($data->save()){
             $log = new Log;
             $log->user_id = Auth::id();
-            $log->mensagem = 'Cadastrou uma Marca';
-            $log->table = 'marcas';
+            $log->mensagem = 'Cadastrou um Tipo Arquivo';
+            $log->table = 'arquivos_tipos';
             $log->action = 1;
             $log->fk = $data->id;
             $log->object = $data;
             $log->save();
-            return response()->json('Marca cadastrada com sucesso!', 200);
+            return response()->json('Tipo cadastrado com sucesso!', 200);
         }else{
              $erro = "Não foi possivel realizar o cadastro!";
             $cod = 171;
@@ -65,36 +59,38 @@ class MarcasController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Marca $marca)
+    public function show(ArquivoTipo $arquivos_tipo)
     {
-        if(!Auth::user()->perfil->veiculos){
-            return response()->json('Não Autorizado', 401);
-        }
-        return $marca;
+        return $arquivos_tipo;
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Marca $marca)
+    public function update(Request $request, ArquivoTipo $arquivos_tipo)
     {
         if(!Auth::user()->perfil->administrador){
             return response()->json('Não Autorizado', 401);
         }
-        $dataold = $marca;
+        $dataold = $arquivos_tipo;
 
-        $marca->nome = $request->nome;   
+        $arquivos_tipo->nome = $request->nome;   
+        $data->foto = $request->foto;   
+        $data->video = $request->video;  
+        $data->audio = $request->audio;  
+        $data->texto = $request->texto;  
+        $data->pdf = $request->pdf;  
 
-        $marca->updated_by = Auth::id();      
+        $arquivos_tipo->updated_by = Auth::id();      
 
-        if($marca->save()){
+        if($arquivos_tipo->save()){
             $log = new Log;
             $log->user_id = Auth::id();
-            $log->mensagem = 'Editou uma Marca';
-            $log->table = 'marcas';
+            $log->mensagem = 'Editou um Tipo de Arquivo';
+            $log->table = 'arquivos_tipos';
             $log->action = 2;
-            $log->fk = $marca->id;
-            $log->object = $marca;
+            $log->fk = $arquivos_tipo->id;
+            $log->object = $arquivos_tipo;
             $log->object_old = $dataold;
             $log->save();
             return response()->json('Marca editada com sucesso!', 200);
@@ -109,22 +105,22 @@ class MarcasController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Marca $marca)
+    public function destroy(ArquivoTipo $arquivos_tipo)
     {
         if(!Auth::user()->perfil->administrador){
             return response()->json('Não Autorizado', 401);
         }
                  
-         if($marca->delete()){
+         if($arquivos_tipo->delete()){
             $log = new Log;
             $log->user_id = Auth::id();
-            $log->mensagem = 'Excluiu uma Marca';
-            $log->table = 'marcas';
+            $log->mensagem = 'Excluiu um Tipo de Arquivo';
+            $log->table = 'arquivos_tipos';
             $log->action = 3;
-            $log->fk = $marca->id;
-            $log->object = $marca;
+            $log->fk = $arquivos_tipo->id;
+            $log->object = $arquivos_tipo;
             $log->save();
-            return response()->json('Marca excluída com sucesso!', 200);
+            return response()->json('Tipo excluído com sucesso!', 200);
           }else{
             $erro = "Não foi possivel realizar a exclusão!";
             $cod = 171;

@@ -15,12 +15,14 @@ return new class extends Migration
         Schema::create('cidades', function (Blueprint $table) {
             $table->id();
             $table->foreignId('estado_id')->nullable()->constrained('estados')->onUpdate('cascade')->onDelete('set null');
-            $table->string('nome', 50)->unique();
+            $table->string('nome', 50);
 
             $table->foreignId('created_by')->nullable()->constrained('users')->onUpdate('cascade')->onDelete('set null');
             $table->foreignId('updated_by')->nullable()->constrained('users')->onUpdate('cascade')->onDelete('set null');
 
             $table->timestamps();
+
+            $table->unique(['estado_id', 'nome']);
         });
         Schema::enableForeignKeyConstraints();
     }

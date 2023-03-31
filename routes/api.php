@@ -10,6 +10,8 @@ use App\Http\Controllers\AnalisesController;
 use App\Http\Controllers\AnalisesPessoasController;
 use App\Http\Controllers\AnalisesTiposController;
 use App\Http\Controllers\AnalisesVeiculosController;
+use App\Http\Controllers\ArquivosController;
+use App\Http\Controllers\ArquivosTiposController;
 use App\Http\Controllers\CidadesController;
 use App\Http\Controllers\CoresController;
 use App\Http\Controllers\EstadosController;
@@ -30,6 +32,7 @@ use App\Http\Controllers\PessoasRedesSociaisController;
 use App\Http\Controllers\PessoasVeiculosController;
 use App\Http\Controllers\RedesSociaisController;
 use App\Http\Controllers\SexosController;
+use App\Http\Controllers\SistemaController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\VeiculosController;
 use App\Http\Controllers\VeiculosArquivosController;
@@ -60,6 +63,7 @@ Route::group(['middleware' => ['auth:api']], function() {
     Route::apiResource('analises-pessoas', AnalisesPessoasController::class);
     Route::apiResource('analises-tipos', AnalisesTiposController::class);
     Route::apiResource('analises-veiculos', AnalisesVeiculosController::class);
+    Route::apiResource('arquivos-tipos', ArquivosTiposController::class);
     Route::apiResource('cidades', CidadesController::class);
     Route::apiResource('cores', CoresController::class);
     Route::apiResource('estados', EstadosController::class);
@@ -90,4 +94,8 @@ Route::group(['middleware' => ['auth:api']], function() {
     Route::get('paises/{id}/estados', [PaisesController::class, 'where']);
     Route::get('pessoas/{cpf}/checkCpf', [PessoasController::class, 'checkCpf']);
     Route::get('users/{user}/resetpass', [UsersController::class, 'resetpass']);
+
+    Route::post('upload-image', [SistemaController::class, 'uploadFoto']);
+    Route::post('upload-arquivo', [ArquivosController::class, 'uploadArquivo']);
+    Route::post('upload-foto', [PessoasController::class, 'uploadFoto']);
 });

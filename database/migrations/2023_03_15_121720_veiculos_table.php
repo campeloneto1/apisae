@@ -15,7 +15,7 @@ return new class extends Migration
         Schema::create('veiculos', function (Blueprint $table) {
             $table->id();
 
-            $table->string('codigo', 50)->nullable();
+            //$table->string('codigo', 50)->nullable();
             $table->string('placa', 15)->unique();
             $table->string('renavam', 50)->nullable();
             $table->string('chassi', 50)->nullable();
@@ -23,7 +23,7 @@ return new class extends Migration
             $table->foreignId('modelo_id')->nullable()->constrained('modelos')->onUpdate('cascade')->onDelete('set null');
             $table->foreignId('veiculo_tipo_id')->nullable()->constrained('veiculos_tipos')->onUpdate('cascade')->onDelete('set null');
             $table->foreignId('pessoa_id')->nullable()->constrained('pessoas')->onUpdate('cascade')->onDelete('set null');
-            $table->foreignId('organicacao_id')->nullable()->constrained('organizacoes')->onUpdate('cascade')->onDelete('set null');
+            $table->foreignId('organizacao_id')->nullable()->constrained('organizacoes')->onUpdate('cascade')->onDelete('set null');
 
             $table->text('observacao')->nullable();
 

@@ -19,7 +19,7 @@ class VeiculosController extends Controller
         if(!Auth::user()->perfil->veiculos){
             return response()->json('Não Autorizado', 401);
         }
-        return Veiculo::orderBy('nome', 'asc')->get();
+        return Veiculo::orderBy('placa', 'asc')->get();
     }
 
     /**
@@ -43,7 +43,7 @@ class VeiculosController extends Controller
 
         $data->observacao = $request->observacao;       
 
-        $data->key = bcripty($request->placa);          
+        $data->key = bcrypt($request->placa);          
 
         $data->created_by = Auth::id();      
 
@@ -73,7 +73,8 @@ class VeiculosController extends Controller
         if(!Auth::user()->perfil->veiculos){
             return response()->json('Não Autorizado', 401);
         }
-        return $veiculo;
+        //return $veiculo;
+        return Veiculo::with('analises','arquivos', 'pessoas', 'organizacoes')->findOrFail($veiculo->id);
     }
 
     /**
@@ -97,7 +98,7 @@ class VeiculosController extends Controller
 
         $veiculo->observacao = $request->observacao;       
 
-        $veiculo->key = bcripty($request->placa);          
+        $veiculo->key = bcrypt($request->placa);          
 
         $veiculo->created_by = Auth::id();      
 

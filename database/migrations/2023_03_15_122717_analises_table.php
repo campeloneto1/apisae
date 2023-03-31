@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('nome', 100)->unique();
             $table->date('data');
             $table->time('hora');
-            $table->integer('tipo_id');
+            $table->foreignId('analise_categoria_id')->nullable()->constrained('analises_categorias')->onUpdate('cascade')->onDelete('set null');
             $table->foreignId('analise_tipo_id')->nullable()->constrained('analises_tipos')->onUpdate('cascade')->onDelete('set null');
        
             $table->string('cep', 10)->nullable();

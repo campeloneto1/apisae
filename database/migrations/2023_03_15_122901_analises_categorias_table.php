@@ -17,6 +17,12 @@ return new class extends Migration
             $table->string('nome', 50)->unique();
             $table->boolean('gestor')->default(0);
 
+            $table->boolean('tipo')->default(0);
+            $table->boolean('previa')->default(0);
+            $table->boolean('sintese')->default(0);
+            
+            $table->boolean('endereco')->default(0);
+
             $table->foreignId('created_by')->nullable()->constrained('users')->onUpdate('cascade')->onDelete('set null');
             $table->foreignId('updated_by')->nullable()->constrained('users')->onUpdate('cascade')->onDelete('set null');
 

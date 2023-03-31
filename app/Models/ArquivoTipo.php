@@ -5,16 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class VeiculoArquivo extends Model
+class ArquivoTipo extends Model
 {
     use HasFactory;
 
-    /**
+     /**
      * The table associated with the model.
      *
      * @var string
      */
-    protected $table = 'veiculos_arquivos';
+    protected $table = 'arquivos_tipos';
 
     /**
      * The attributes that are mass assignable.
@@ -31,23 +31,4 @@ class VeiculoArquivo extends Model
      * @var string
      */
     protected $primaryKey = 'id';
-
-
-    /**
-     * The relationships that should always be loaded.
-     *
-     * @var array
-     */
-    protected $with = ['veiculo', 'arquivo_tipo'];
-
-    
-    public function veiculo()
-    {
-        return $this->belongsTo(Veiculo::class);
-    }
-
-    public function arquivo_tipo()
-    {
-        return $this->belongsTo(ArquivoTipo::class);
-    }
 }

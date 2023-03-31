@@ -37,7 +37,7 @@ class Pessoa extends Model
      *
      * @var array
      */
-    protected $with = ['sexo', 'cidade', 'redes_sociais'];
+    protected $with = ['sexo', 'cidade', 'redes_sociais', 'influencia'];
     
     public function sexo()
     {
@@ -49,8 +49,37 @@ class Pessoa extends Model
         return $this->belongsTo(Cidade::class);
     }
 
+    public function influencia()
+    {
+        return $this->belongsTo(Influencia::class);
+    }
+
     public function redes_sociais()
     {
-        return $this->belongsToMany(RedeSocial::class, 'pessoas_redes_sociais', 'pessoa_id', 'rede_social_id')->withPivot('id')->orderBy('nome');
+        return $this->belongsToMany(RedeSocial::class, 'pessoas_redes_sociais', 'pessoa_id', 'rede_social_id')->withPivot('id', 'nome')->orderBy('nome');
     }
+
+    public function veiculos()
+    {
+        return $this->belongsToMany(Veiculo::class, 'pessoas_veiculos', 'pessoa_id', 'veiculo_id')->withPivot('id')->orderBy('placa');
+    }
+
+    public function analises()
+    {
+        return $this->belongsToMany(Analise::class, 'analises_pessoas', 'pessoa_id', 'analise_id')->withPivot('id', 'lider')->orderBy('nome');
+    }
+
+
+    public function organizacoes()
+    {
+        return $this->belongsToMany(Organizacao::class, 'organizacoes_pessoas', 'pessoa_id', 'organizacao_id')->withPivot('id', 'lider')->orderBy('nome');
+    }
+
+    public function arquivos()
+    {
+        return $this->hasMany(PessoaArquivo::class, 'pessoa_id')->without('pessoa');
+    }
+
+
+     
 }

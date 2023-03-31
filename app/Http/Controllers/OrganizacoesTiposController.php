@@ -29,7 +29,7 @@ class OrganizacoesTiposController extends Controller
         if(!Auth::user()->perfil->gestor){
             return response()->json('Não Autorizado', 401);
         }
-        $data = new AnaliseTipo;
+        $data = new OrganizacaoTipo;
 
         $data->nome = $request->nome;   
 

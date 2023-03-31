@@ -38,11 +38,16 @@ class OrganizacaoArquivo extends Model
      *
      * @var array
      */
-    protected $with = ['organizacao'];
+    protected $with = ['organizacao', 'arquivo_tipo'];
 
     
     public function organizacao()
     {
         return $this->belongsTo(Organizacao::class);
+    }
+
+    public function arquivo_tipo()
+    {
+        return $this->belongsTo(ArquivoTipo::class);
     }
 }

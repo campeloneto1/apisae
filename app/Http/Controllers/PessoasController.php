@@ -83,7 +83,7 @@ class PessoasController extends Controller
         if(!Auth::user()->perfil->pessoas){
             return response()->json('Não Autorizado', 401);
         }
-        return $pessoa;
+        return Pessoa::with('analises','arquivos', 'veiculos', 'organizacoes')->findOrFail($pessoa->id);
     }
 
     /**
@@ -184,5 +184,56 @@ class PessoasController extends Controller
         }else{
             return false;
         }
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+     public function uploadFoto(Request $request){  
+        if ($request->hasFile('file')){
+            $file      = $request->file('file');
+          
+
+            if($request->file('file')->getSize() > 1000000){
+                 $erro = "Tamanho máximo permitido é 1mb!";
+                $cod = 171;
+                $resposta = ['erro' => $erro, 'cod' => $cod];
+               return response()->json($resposta, 403);
+            }
+
+            $filename  = $file->getClientOriginalName();
+            $extension = $file->getClientOriginalExtension();
+            $picture   = date('dmYHis').".".$extension;
+            $file->move(storage_path().'/app/public/', $picture);
+            
+            $pessoa = Pessoa::find($request->id);
+            $pessoa->foto = $picture;
+            if($pessoa->save()){
+                 $log = new Log;
+                $log->user_id = Auth::id();
+                $log->mensagem = 'Alterou foto de uma Pessoa';
+                $log->table = 'pessoas';
+                $log->action = 2;
+                $log->fk = $pessoa->id;
+                $log->object = $pessoa;
+                $log->save();
+                return response()->json('Foto alterada com sucesso!', 200);
+            }else{
+                $erro = "Não foi possivel realizar a edição!";
+                $cod = 171;
+                $resposta = ['erro' => $erro, 'cod' => $cod];
+               return response()->json($resposta, 404);
+            }
+        }else{
+              $erro = "Não foi possivel realizar a edição!";
+                $cod = 171;
+                $resposta = ['erro' => $erro, 'cod' => $cod];
+               return response()->json($resposta, 404);
+        }
+  
+        
     }
 }
