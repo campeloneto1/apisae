@@ -34,6 +34,7 @@ class AnalisesArquivosController extends Controller
 
         $data->analise_id = $request->analise_id;     
         $data->nome = $request->nome;   
+        $data->arquivo = $request->arquivo;   
         $data->arquivo_tipo_id = $request->arquivo_tipo_id;   
 
         $data->created_by = Auth::id();      
@@ -78,7 +79,8 @@ class AnalisesArquivosController extends Controller
         $dataold = $analises_arquivo;
 
         $analises_arquivo->analise_id = $request->analise_id;     
-        $analises_arquivo->nome = $request->nome;   
+        $analises_arquivo->nome = $request->nome;  
+        $analises_arquivo->arquivo = $request->arquivo;   
         $analises_arquivo->arquivo_tipo_id = $request->arquivo_tipo_id;   
 
         $analises_arquivo->updated_by = Auth::id();      

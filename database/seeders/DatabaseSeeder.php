@@ -16,7 +16,7 @@ class DatabaseSeeder extends Seeder
      * Seed the application's database.
 
     UPDATE `perfis` SET 
-    `administrador`= 1,`gestor`= 1,`relatorios`= 1,
+    `administrador`= 1,`gestor`= 1,`restrito`= 1,`relatorios`= 1,
     `users`= 1,`users_cad`= 1,`users_edt`= 1,`users_del`= 1,
     `analises`= 1,`analises_cad`= 1,`analises_edt`= 1,`analises_del`= 1, 
     `organizacoes`= 1,`organizacoes_cad`= 1,`organizacoes_edt`= 1,`organizacoes_del`= 1, 

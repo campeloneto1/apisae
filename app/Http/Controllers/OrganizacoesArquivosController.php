@@ -33,6 +33,7 @@ class OrganizacoesArquivosController extends Controller
 
         $data->organizacao_id = $request->organizacao_id;     
         $data->nome = $request->nome;   
+        $data->arquivo = $request->arquivo;   
         $data->arquivo_tipo_id = $request->arquivo_tipo_id;   
 
         $data->created_by = Auth::id();      
@@ -77,7 +78,8 @@ class OrganizacoesArquivosController extends Controller
         $dataold = $organizacoes_arquivo;
 
         $organizacoes_arquivo->analise_id = $request->analise_id;     
-        $organizacoes_arquivo->nome = $request->nome;   
+        $organizacoes_arquivo->nome = $request->nome;  
+        $organizacoes_arquivo->arquivo = $request->arquivo;   
         $organizacoes_arquivo->arquivo_tipo_id = $request->arquivo_tipo_id;   
 
         $organizacoes_arquivo->updated_by = Auth::id();      

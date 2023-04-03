@@ -33,7 +33,8 @@ class PessoasArquivosController extends Controller
         $data = new PessoaArquivo;
 
         $data->pessoa_id = $request->pessoa_id;     
-        $data->nome = $request->nome;   
+        $data->nome = $request->nome;  
+        $data->arquivo = $request->arquivo;  
         $data->arquivo_tipo_id = $request->arquivo_tipo_id;   
 
         $data->created_by = Auth::id();      
@@ -79,6 +80,7 @@ class PessoasArquivosController extends Controller
 
         $pessoas_arquivo->pessoa_id = $request->pessoa_id;     
         $pessoas_arquivo->nome = $request->nome;   
+        $pessoas_arquivo->arquivo = $request->arquivo;   
         $pessoas_arquivo->arquivo_tipo_id = $request->arquivo_tipo_id;   
 
         $pessoas_arquivo->updated_by = Auth::id();      

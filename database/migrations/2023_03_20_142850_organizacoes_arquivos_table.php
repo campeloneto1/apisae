@@ -15,7 +15,8 @@ return new class extends Migration
         Schema::create('organizacoes_arquivos', function (Blueprint $table) {
             $table->id();
             $table->foreignId('organizacao_id')->nullable()->constrained('organizacoes')->onUpdate('cascade')->onDelete('set null');
-            $table->string('nome', 100)->unique();   
+            $table->string('nome', 250);   
+            $table->string('arquivo', 100)->unique();   
             $table->foreignId('arquivo_tipo_id')->nullable()->constrained('arquivos_tipos')->onUpdate('cascade')->onDelete('set null');
             //$table->date('data')->nullable();
             //$table->time('hora')->nullable();

@@ -32,7 +32,8 @@ class VeiculosArquivosController extends Controller
         $data = new VeiculoArquivo;
 
         $data->veiculo_id = $request->veiculo_id;     
-        $data->nome = $request->nome;   
+        $data->nome = $request->nome;  
+        $data->arquivo = $request->arquivo;    
         $data->arquivo_tipo_id = $request->arquivo_tipo_id;   
 
         $data->created_by = Auth::id();      
@@ -78,6 +79,7 @@ class VeiculosArquivosController extends Controller
 
         $veiculos_arquivo->veiculo_id = $request->veiculo_id;     
         $veiculos_arquivo->nome = $request->nome;   
+        $veiculos_arquivo->arquivo = $request->arquivo;   
         $veiculos_arquivo->arquivo_tipo_id = $request->arquivo_tipo_id;   
 
         $veiculos_arquivo->updated_by = Auth::id();      

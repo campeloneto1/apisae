@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('nome', 100)->unique();   
             $table->boolean('administrador')->default(0);
             $table->boolean('gestor')->default(0);
-
+            $table->boolean('restrito')->default(0);
             $table->boolean('relatorios')->default(0);       
 
             $table->boolean('users')->default(0);        

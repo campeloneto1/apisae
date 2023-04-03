@@ -37,12 +37,17 @@ class AnaliseArquivo extends Model
      *
      * @var array
      */
-    protected $with = ['analise'];
+    protected $with = ['analise', 'arquivo_tipo'];
 
     
     public function analise()
     {
         return $this->belongsTo(Analise::class);
+    }
+
+    public function arquivo_tipo()
+    {
+        return $this->belongsTo(ArquivoTipo::class);
     }
 
 

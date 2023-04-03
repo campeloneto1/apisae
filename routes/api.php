@@ -16,6 +16,7 @@ use App\Http\Controllers\CidadesController;
 use App\Http\Controllers\CoresController;
 use App\Http\Controllers\EstadosController;
 use App\Http\Controllers\InfluenciasController;
+use App\Http\Controllers\InicioController;
 use App\Http\Controllers\LogsController;
 use App\Http\Controllers\MarcasController;
 use App\Http\Controllers\ModelosController;
@@ -26,6 +27,7 @@ use App\Http\Controllers\OrganizacoesTiposController;
 use App\Http\Controllers\OrganizacoesVeiculosController;
 use App\Http\Controllers\PaisesController;
 use App\Http\Controllers\PerfisController;
+use App\Http\Controllers\PesquisarController;
 use App\Http\Controllers\PessoasController;
 use App\Http\Controllers\PessoasArquivosController;
 use App\Http\Controllers\PessoasRedesSociaisController;
@@ -88,6 +90,9 @@ Route::group(['middleware' => ['auth:api']], function() {
     Route::apiResource('veiculos', VeiculosController::class);
     Route::apiResource('veiculos-arquivos', VeiculosArquivosController::class);
     Route::apiResource('veiculos-tipos', VeiculosTiposController::class);
+
+    Route::get('inicio-quantanalises', [InicioController::class, 'quant_analises']);
+    Route::post('pesquisar', [PesquisarController::class, 'pesquisar']);
 
     Route::get('estados/{id}/cidades', [EstadosController::class, 'where']);
     Route::get('marcas/{id}/modelos', [MarcasController::class, 'where']);

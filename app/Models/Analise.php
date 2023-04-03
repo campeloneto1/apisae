@@ -49,4 +49,20 @@ class Analise extends Model
     {
         return $this->belongsTo(AnaliseTipo::class);
     }
+
+     public function pessoas()
+    {
+        return $this->belongsToMany(Pessoa::class, 'analises_pessoas', 'analise_id', 'pessoa_id')->withPivot('id', 'lider')->orderBy('nome');
+    }
+
+    public function veiculos()
+    {
+        return $this->belongsToMany(Veiculo::class, 'analises_veiculos', 'analise_id', 'veiculo_id')->withPivot('id')->orderBy('placa');
+    }
+
+     public function arquivos()
+    {
+        return $this->hasMany(AnaliseArquivo::class, 'analise_id')->without('analise');
+    }
+
 }

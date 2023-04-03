@@ -16,6 +16,7 @@ return new class extends Migration
             $table->id();
             $table->string('nome', 50)->unique();
             $table->boolean('gestor')->default(0);
+            $table->boolean('restrito')->default(0);
 
             $table->boolean('tipo')->default(0);
             $table->boolean('previa')->default(0);

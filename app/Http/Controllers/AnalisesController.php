@@ -79,7 +79,7 @@ class AnalisesController extends Controller
         if(!Auth::user()->perfil->analises){
             return response()->json('Não Autorizado', 401);
         }
-        return $analise;
+        return Analise::with('pessoas', 'veiculos', 'arquivos')->findOrFail($analise->id);
     }
 
     /**
