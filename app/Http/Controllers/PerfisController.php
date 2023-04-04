@@ -34,9 +34,10 @@ class PerfisController extends Controller
 
         $data->nome = $request->nome;   
 
-        $data->administrador = $request->nome;   
-        $data->gestor = $request->nome;   
-        $data->relatorios = $request->nome;   
+        $data->administrador = $request->administrador;   
+        $data->gestor = $request->gestor;   
+        $data->relatorios = $request->relatorios;   
+        $data->restrito = $request->restrito;   
 
         $data->users = $request->users;   
         $data->users_cad = $request->users_cad;   
@@ -106,9 +107,10 @@ class PerfisController extends Controller
 
         $perfi->nome = $request->nome;  
 
-        $perfi->administrador = $request->nome;   
-        $perfi->gestor = $request->nome;   
-        $perfi->relatorios = $request->nome;   
+        $perfi->administrador = $request->administrador;   
+        $perfi->gestor = $request->gestor;   
+        $perfi->relatorios = $request->relatorios; 
+        $perfi->restrito = $request->restrito;   
 
         $perfi->users = $request->users;   
         $perfi->users_cad = $request->users_cad;   

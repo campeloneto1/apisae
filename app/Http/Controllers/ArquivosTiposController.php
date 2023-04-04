@@ -35,6 +35,7 @@ class ArquivosTiposController extends Controller
         $data->audio = $request->audio;  
         $data->texto = $request->texto;  
         $data->pdf = $request->pdf;  
+        $data->link = $request->link;  
 
         $data->created_by = Auth::id();      
 
@@ -75,11 +76,12 @@ class ArquivosTiposController extends Controller
         $dataold = $arquivos_tipo;
 
         $arquivos_tipo->nome = $request->nome;   
-        $data->foto = $request->foto;   
-        $data->video = $request->video;  
-        $data->audio = $request->audio;  
-        $data->texto = $request->texto;  
-        $data->pdf = $request->pdf;  
+        $arquivos_tipo->foto = $request->foto;   
+        $arquivos_tipo->video = $request->video;  
+        $arquivos_tipo->audio = $request->audio;  
+        $arquivos_tipo->texto = $request->texto;  
+        $arquivos_tipo->pdf = $request->pdf;  
+        $arquivos_tipo->link = $request->link;  
 
         $arquivos_tipo->updated_by = Auth::id();      
 

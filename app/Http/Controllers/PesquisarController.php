@@ -18,6 +18,11 @@ class PesquisarController extends Controller
             ->orWhere('observacao', 'like', '%'.$request->pesquisar.'%')
             ->orWhere('previa', 'like', '%'.$request->pesquisar.'%')
             ->orWhere('sintese', 'like', '%'.$request->pesquisar.'%')
+            ->orWhere('rua', 'like', '%'.$request->pesquisar.'%')
+            ->orWhere('complemento', 'like', '%'.$request->pesquisar.'%')
+            ->orWhereRelation('pessoas', 'nome', 'like', '%'.$request->pesquisar.'%')
+            ->orWhereRelation('veiculos', 'placa', 'like', '%'.$request->pesquisar.'%')
+            ->orderBy('data', 'desc')
             ->get();
             $array['analises'] = $analises;
         }
@@ -29,6 +34,9 @@ class PesquisarController extends Controller
             ->orWhere('rua', 'like', '%'.$request->pesquisar.'%')
             ->orWhere('complemento', 'like', '%'.$request->pesquisar.'%')
             ->orWhere('observacao', 'like', '%'.$request->pesquisar.'%')
+            ->orWhereRelation('pessoas', 'nome', 'like', '%'.$request->pesquisar.'%')
+            ->orWhereRelation('veiculos', 'placa', 'like', '%'.$request->pesquisar.'%')
+            ->orderBy('nome', 'asc')
             ->get();
             $array['organizacoes'] = $organizacoes;
         }
@@ -44,6 +52,8 @@ class PesquisarController extends Controller
             ->orWhere('rua', 'like', '%'.$request->pesquisar.'%')
             ->orWhere('complemento', 'like', '%'.$request->pesquisar.'%')
             ->orWhere('observacao', 'like', '%'.$request->pesquisar.'%')
+            ->orWhereRelation('veiculos', 'placa', 'like', '%'.$request->pesquisar.'%')
+            ->orderBy('nome', 'asc')
             ->get();
             $array['pessoas'] = $pessoas;
         }
@@ -52,6 +62,8 @@ class PesquisarController extends Controller
             ->orWhere('chassi', 'like', '%'.$request->pesquisar.'%')
             ->orWhere('renavam', 'like', '%'.$request->pesquisar.'%')
             ->orWhere('observacao', 'like', '%'.$request->pesquisar.'%')
+            ->orWhereRelation('pessoas', 'nome', 'like', '%'.$request->pesquisar.'%')
+            ->orderBy('placa', 'asc')
             ->get();
             $array['veiculos'] = $veiculos;
         }

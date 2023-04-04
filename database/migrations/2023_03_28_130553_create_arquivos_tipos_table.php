@@ -21,6 +21,7 @@ return new class extends Migration
             $table->boolean('texto')->default(0);
             $table->boolean('pdf')->default(0);
             $table->boolean('audio')->default(0);
+            $table->boolean('link')->default(0);
 
             $table->foreignId('created_by')->nullable()->constrained('users')->onUpdate('cascade')->onDelete('set null');
             $table->foreignId('updated_by')->nullable()->constrained('users')->onUpdate('cascade')->onDelete('set null');

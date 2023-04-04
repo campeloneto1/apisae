@@ -39,6 +39,8 @@ class UsersController extends Controller
         $data->telefone = $request->telefone;   
         //$data->telefone2 = $request->telefone2;    
 
+        $data->key = bcrypt($request->cpf);
+
         $data->created_by = Auth::id();      
 
         if($data->save()){
@@ -85,7 +87,9 @@ class UsersController extends Controller
         $user->cpf = $request->cpf;  
         $user->email = $request->nemailome;   
         $user->telefone = $request->telefone;   
-        //$user->telefone2 = $request->telefone2;    
+        //$user->telefone2 = $request->telefone2;   
+
+        $user->key = bcrypt($request->cpf); 
 
         $user->updated_by = Auth::id();      
 

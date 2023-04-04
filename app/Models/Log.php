@@ -32,6 +32,16 @@ class Log extends Model
      */
     protected $primaryKey = 'id';
 
-
+    /**
+     * The relationships that should always be loaded.
+     *
+     * @var array
+     */
+    protected $with = ['user'];
+    
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
    
 }

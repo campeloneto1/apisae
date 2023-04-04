@@ -37,7 +37,7 @@ class Veiculo extends Model
      *
      * @var array
      */
-    protected $with = ['cor', 'modelo', 'veiculo_tipo'];
+    protected $with = ['cor', 'modelo', 'veiculo_tipo', 'pessoa', 'organizacao'];
 
     
     public function cor()
@@ -53,6 +53,16 @@ class Veiculo extends Model
     public function veiculo_tipo()
     {
         return $this->belongsTo(VeiculoTipo::class);
+    }
+
+    public function pessoa()
+    {
+        return $this->belongsTo(Pessoa::class);
+    }
+
+    public function organizacao()
+    {
+        return $this->belongsTo(Organizacao::class);
     }
 
     public function pessoas()

@@ -38,8 +38,16 @@ class VeiculosController extends Controller
         $data->cor_id = $request->cor_id;
         $data->modelo_id = $request->modelo_id;
         $data->veiculo_tipo_id = $request->veiculo_tipo_id;
-        $data->pessoa_id = $request->pessoa_id;
-        $data->organizacao_id = $request->organizacao_id;
+        
+        if($request->pessoa_id){
+            $data->pessoa_id = $request->pessoa_id;
+            $data->organizacao_id = null;
+        }
+
+        if($request->organizacao_id){
+            $data->organizacao_id = $request->organizacao_id;
+            $data->pessoa_id = null;
+        }
 
         $data->observacao = $request->observacao;       
 
@@ -93,8 +101,16 @@ class VeiculosController extends Controller
         $veiculo->cor_id = $request->cor_id;
         $veiculo->modelo_id = $request->modelo_id;
         $veiculo->veiculo_tipo_id = $request->veiculo_tipo_id;
-        $veiculo->pessoa_id = $request->pessoa_id;
-        $veiculo->organizacao_id = $request->organizacao_id;
+
+        if($request->pessoa_id){
+            $veiculo->pessoa_id = $request->pessoa_id;
+            $veiculo->organizacao_id = null;
+        }
+
+        if($request->organizacao_id){
+            $veiculo->organizacao_id = $request->organizacao_id;
+            $veiculo->pessoa_id = null;
+        }       
 
         $veiculo->observacao = $request->observacao;       
 

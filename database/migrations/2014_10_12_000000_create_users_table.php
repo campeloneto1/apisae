@@ -22,6 +22,8 @@ return new class extends Migration
             $table->string('telefone', 11)->nullable();
             //$table->string('telefone2', 12)->nullable();
             $table->string('password', 100);
+
+            $table->string('key', 100)->nullable();
             
             $table->rememberToken();
 

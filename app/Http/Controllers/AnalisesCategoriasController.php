@@ -37,7 +37,8 @@ class AnalisesCategoriasController extends Controller
         $data->tipo = $request->tipo;   
         $data->previa = $request->previa;  
         $data->sintese = $request->sintese;  
-        $data->endereco = $request->endereco;  
+        $data->endereco = $request->endereco; 
+        $data->restrito = $request->restrito;  
 
         $data->created_by = Auth::id();      
 
@@ -86,6 +87,7 @@ class AnalisesCategoriasController extends Controller
         $analises_categoria->previa = $request->previa;  
         $analises_categoria->sintese = $request->sintese;  
         $analises_categoria->endereco = $request->endereco;  
+        $analises_categoria->restrito = $request->restrito;  
 
         $analises_categoria->updated_by = Auth::id();      
 
