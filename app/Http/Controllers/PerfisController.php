@@ -49,6 +49,11 @@ class PerfisController extends Controller
         $data->analises_edt = $request->analises_edt;   
         $data->analises_del = $request->analises_del; 
 
+        $data->investigacoes_sociais = $request->investigacoes_sociais;   
+        $data->investigacoes_sociais_cad = $request->investigacoes_sociais_cad;   
+        $data->investigacoes_sociais_edt = $request->investigacoes_sociais_edt;   
+        $data->investigacoes_sociais_del = $request->investigacoes_sociais_del; 
+
         $data->organizacoes = $request->organizacoes;   
         $data->organizacoes_cad = $request->organizacoes_cad;   
         $data->organizacoes_edt = $request->organizacoes_edt;   

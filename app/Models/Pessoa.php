@@ -37,7 +37,7 @@ class Pessoa extends Model
      *
      * @var array
      */
-    protected $with = ['sexo', 'cidade', 'redes_sociais', 'influencia'];
+    protected $with = ['sexo', 'cidade', 'redes_sociais', 'influencia', 'cnh_categoria', 'escolaridade', 'naturalidade'];
     
     public function sexo()
     {
@@ -47,6 +47,21 @@ class Pessoa extends Model
     public function cidade()
     {
         return $this->belongsTo(Cidade::class);
+    }
+
+    public function cnh_categoria()
+    {
+        return $this->belongsTo(CnhCategoria::class);
+    }
+
+    public function escolaridade()
+    {
+        return $this->belongsTo(Escolaridade::class);
+    }
+
+    public function naturalidade()
+    {
+        return $this->belongsTo(Cidade::class, 'naturalidade_id');
     }
 
     public function influencia()

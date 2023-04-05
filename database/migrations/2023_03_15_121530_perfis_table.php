@@ -38,7 +38,12 @@ return new class extends Migration
             $table->boolean('pessoas')->default(0);        
             $table->boolean('pessoas_cad')->default(0);  
             $table->boolean('pessoas_edt')->default(0);  
-            $table->boolean('pessoas_del')->default(0);     
+            $table->boolean('pessoas_del')->default(0);  
+
+            $table->boolean('investigacoes_sociais')->default(0);        
+            $table->boolean('investigacoes_sociais_cad')->default(0);  
+            $table->boolean('investigacoes_sociais_edt')->default(0);  
+            $table->boolean('investigacoes_sociais_del')->default(0);   
 
             $table->boolean('veiculos')->default(0);        
             $table->boolean('veiculos_cad')->default(0);  

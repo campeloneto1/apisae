@@ -51,7 +51,12 @@ class PessoasController extends Controller
         $data->numero = $request->numero;   
         $data->bairro = $request->bairro;   
         $data->cidade_id = $request->cidade_id;   
-        $data->complemento = $request->complemento;       
+        $data->complemento = $request->complemento;     
+
+        $data->cnh = $request->cnh;     
+        $data->cnh_categoria_id = $request->cnh_categoria_id;     
+        $data->escolaridade_id = $request->escolaridade_id;     
+        $data->naturalidade_id = $request->naturalidade_id;       
 
         $data->key = bcrypt($request->cpf);          
 
@@ -116,7 +121,12 @@ class PessoasController extends Controller
         $pessoa->numero = $request->numero;   
         $pessoa->bairro = $request->bairro;   
         $pessoa->cidade_id = $request->cidade_id;   
-        $pessoa->complemento = $request->complemento;       
+        $pessoa->complemento = $request->complemento;  
+
+        $pessoa->cnh = $request->cnh;     
+        $pessoa->cnh_categoria_id = $request->cnh_categoria_id;     
+        $pessoa->escolaridade_id = $request->escolaridade_id;     
+        $pessoa->naturalidade_id = $request->naturalidade_id;            
 
         $pessoa->key = bcrypt($request->cpf);                  
 

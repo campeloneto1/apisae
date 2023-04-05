@@ -37,7 +37,12 @@ class Analise extends Model
      *
      * @var array
      */
-    protected $with = ['analise_categoria', 'analise_tipo'];
+    protected $with = ['analise_categoria', 'analise_tipo', 'cidade'];
+
+    public function cidade()
+    {
+        return $this->belongsTo(Cidade::class);
+    }
 
     
     public function analise_categoria()

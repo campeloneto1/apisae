@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('pai', 100)->nullable();
             $table->foreignId('sexo_id')->nullable()->constrained('sexos')->onUpdate('cascade')->onDelete('set null');
             $table->foreignId('influencia_id')->nullable()->constrained('influencias')->onUpdate('cascade')->onDelete('set null');
-            
+
             $table->string('telefone1', 20)->nullable();
             $table->string('telefone2', 20)->nullable();
             $table->string('email', 100)->unique()->nullable();
@@ -34,6 +34,12 @@ return new class extends Migration
             $table->string('numero', 10)->nullable();
             $table->string('bairro', 50)->nullable();
             $table->string('complemento', 100)->nullable();
+
+
+            $table->string('cnh', 15)->nullable();
+            $table->foreignId('cnh_categoria_id')->nullable()->constrained('cnh_categorias')->onUpdate('cascade')->onDelete('set null');
+            $table->foreignId('escolaridade_id')->nullable()->constrained('escolaridades')->onUpdate('cascade')->onDelete('set null');
+            $table->foreignId('naturalidade_id')->nullable()->constrained('cidades')->onUpdate('cascade')->onDelete('set null');            
 
             $table->text('observacao')->nullable();
         
