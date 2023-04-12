@@ -35,6 +35,7 @@ class VeiculosController extends Controller
         $data->placa = $request->placa;   
         $data->renavam = $request->renavam;
         $data->chassi = $request->chassi;
+        $data->ano = $request->ano;
         $data->cor_id = $request->cor_id;
         $data->modelo_id = $request->modelo_id;
         $data->veiculo_tipo_id = $request->veiculo_tipo_id;
@@ -98,6 +99,7 @@ class VeiculosController extends Controller
         $veiculo->placa = $request->placa;   
         $veiculo->renavam = $request->renavam;
         $veiculo->chassi = $request->chassi;
+        $veiculo->ano = $request->ano;
         $veiculo->cor_id = $request->cor_id;
         $veiculo->modelo_id = $request->modelo_id;
         $veiculo->veiculo_tipo_id = $request->veiculo_tipo_id;

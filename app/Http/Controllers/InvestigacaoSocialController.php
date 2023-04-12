@@ -15,7 +15,7 @@ class InvestigacaoSocialController extends Controller
      */
     public function index()
     {
-        if(!Auth::user()->perfil->veiculos){
+        if(!Auth::user()->perfil->investigacoes_sociais){
             return response()->json('Não Autorizado', 401);
         }
         return InvestigacaoSocial::orderBy('id', 'desc')->get();
@@ -32,6 +32,7 @@ class InvestigacaoSocialController extends Controller
         $data = new InvestigacaoSocial;
 
         $data->pessoa_id = $request->pessoa_id;   
+        $data->nome_guerra = $request->nome_guerra;  
         $data->matricula = $request->matricula;   
         $data->numeral = $request->numeral;   
         $data->data_ingresso = $request->data_ingresso;   
@@ -41,6 +42,9 @@ class InvestigacaoSocialController extends Controller
         $data->situacao_tipo_id = $request->situacao_tipo_id;   
         $data->comportamento_id = $request->comportamento_id;   
 
+        $data->lotacoes = $request->lotacoes;   
+        $data->boletins = $request->boletins;   
+        $data->cgd = $request->cgd; 
         $data->sip = $request->sip;   
         $data->sinesp = $request->sinesp;   
         $data->tjce = $request->tjce;   
@@ -72,7 +76,7 @@ class InvestigacaoSocialController extends Controller
      */
     public function show(InvestigacaoSocial $investigacoes_sociai)
     {
-         if(!Auth::user()->perfil->veiculos){
+         if(!Auth::user()->perfil->investigacoes_sociais){
             return response()->json('Não Autorizado', 401);
         }
         return $investigacoes_sociai;
@@ -89,6 +93,7 @@ class InvestigacaoSocialController extends Controller
         $dataold = $investigacoes_sociai;
 
         $investigacoes_sociai->pessoa_id = $request->pessoa_id;   
+        $investigacoes_sociai->nome_guerra = $request->nome_guerra;   
         $investigacoes_sociai->matricula = $request->matricula;   
         $investigacoes_sociai->numeral = $request->numeral;   
         $investigacoes_sociai->data_ingresso = $request->data_ingresso;   
@@ -98,6 +103,9 @@ class InvestigacaoSocialController extends Controller
         $investigacoes_sociai->situacao_tipo_id = $request->situacao_tipo_id;   
         $investigacoes_sociai->comportamento_id = $request->comportamento_id;   
 
+        $investigacoes_sociai->lotacoes = $request->lotacoes;   
+        $investigacoes_sociai->boletins = $request->boletins; 
+        $investigacoes_sociai->cgd = $request->cgd;  
         $investigacoes_sociai->sip = $request->sip;   
         $investigacoes_sociai->sinesp = $request->sinesp;   
         $investigacoes_sociai->tjce = $request->tjce;   

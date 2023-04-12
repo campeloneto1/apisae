@@ -13,7 +13,8 @@ return new class extends Migration
     {
         Schema::create('investigacoes_sociais', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('pessoa_id')->nullable()->constrained('pessoas')->onUpdate('cascade')->onDelete('set null');
+            $table->foreignId('pessoa_id')->nullable()->unique()->constrained('pessoas')->onUpdate('cascade')->onDelete('set null');
+            $table->string('nome_guerra', 40)->nullable();
             $table->string('matricula', 8)->nullable();
             $table->string('numeral', 8)->nullable();
             $table->date('data_ingresso')->nullable();
@@ -23,6 +24,9 @@ return new class extends Migration
             $table->foreignId('situacao_tipo_id')->nullable()->constrained('situacoes_tipos')->onUpdate('cascade')->onDelete('set null');
             $table->foreignId('comportamento_id')->nullable()->constrained('comportamentos')->onUpdate('cascade')->onDelete('set null');
 
+            $table->text('lotacoes')->nullable();
+            $table->text('boletins')->nullable();
+            $table->text('cgd')->nullable();
             $table->text('sip')->nullable();
             $table->text('sinesp')->nullable();
             $table->text('tjce')->nullable();

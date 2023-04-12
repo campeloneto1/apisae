@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('placa', 15)->unique();
             $table->string('renavam', 50)->nullable();
             $table->string('chassi', 50)->nullable();
+            $table->integer('ano')->nullable();
             $table->foreignId('cor_id')->nullable()->constrained('cores')->onUpdate('cascade')->onDelete('set null');
             $table->foreignId('modelo_id')->nullable()->constrained('modelos')->onUpdate('cascade')->onDelete('set null');
             $table->foreignId('veiculo_tipo_id')->nullable()->constrained('veiculos_tipos')->onUpdate('cascade')->onDelete('set null');

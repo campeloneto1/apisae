@@ -2,23 +2,23 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\VeiculoTipo;
+use App\Models\VinculoTipo;
 use App\Models\Log;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class VeiculosTiposController extends Controller
+class VinculoTipoController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        if(!Auth::user()->perfil->veiculos){
+        if(!Auth::user()->perfil->pessoas){
             return response()->json('Não Autorizado', 401);
         }
-        return VeiculoTipo::orderBy('nome', 'asc')->get();
+        return VinculoTipo::orderBy('nome', 'asc')->get();
     }
 
     /**
@@ -29,7 +29,7 @@ class VeiculosTiposController extends Controller
         if(!Auth::user()->perfil->administrador){
             return response()->json('Não Autorizado', 401);
         }
-        $data = new VeiculoTipo;
+        $data = new VinculoTipo;
 
         $data->nome = $request->nome;   
 
@@ -38,8 +38,8 @@ class VeiculosTiposController extends Controller
         if($data->save()){
             $log = new Log;
             $log->user_id = Auth::id();
-            $log->mensagem = 'Cadastrou um Tipo de Veículo';
-            $log->table = 'veiculos_tipos';
+            $log->mensagem = 'Cadastrou um Tipo de Vínculo';
+            $log->table = 'vinculos_tipos';
             $log->action = 1;
             $log->fk = $data->id;
             $log->object = $data;
@@ -56,37 +56,36 @@ class VeiculosTiposController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(VeiculoTipo $veiculos_tipo)
+    public function show(VinculoTipo $vinculos_tipos)
     {
-        if(!Auth::user()->perfil->veiculos){
+        if(!Auth::user()->perfil->pessoas){
             return response()->json('Não Autorizado', 401);
         }
-        return $veiculos_tipo;
+        return $vinculos_tipos;
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, VeiculoTipo $veiculos_tipo)
+    public function update(Request $request, VinculoTipo $vinculos_tipos)
     {
-        
         if(!Auth::user()->perfil->administrador){
             return response()->json('Não Autorizado', 401);
         }
-        $dataold = $veiculos_tipo;
+        $dataold = $vinculos_tipos;
 
-        $veiculos_tipo->nome = $request->nome;   
+        $vinculos_tipos->nome = $request->nome;   
 
-        $veiculos_tipo->updated_by = Auth::id();      
+        $vinculos_tipos->updated_by = Auth::id();      
 
-        if($veiculos_tipo->save()){
+        if($vinculos_tipos->save()){
             $log = new Log;
             $log->user_id = Auth::id();
-            $log->mensagem = 'Editou um Tipo de Veículo';
-            $log->table = 'veiculos_tipos';
+            $log->mensagem = 'Editou um Tipo de Vínculo';
+            $log->table = 'vinculos_tipos';
             $log->action = 2;
-            $log->fk = $veiculos_tipo->id;
-            $log->object = $veiculos_tipo;
+            $log->fk = $vinculos_tipos->id;
+            $log->object = $vinculos_tipos;
             $log->object_old = $dataold;
             $log->save();
             return response()->json('Tipo editado com sucesso!', 200);
@@ -101,20 +100,20 @@ class VeiculosTiposController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(VeiculoTipo $veiculos_tipo)
+    public function destroy(VinculoTipo $vinculos_tipos)
     {
         if(!Auth::user()->perfil->administrador){
             return response()->json('Não Autorizado', 401);
         }
                  
-         if($veiculos_tipo->delete()){
+         if($vinculos_tipos->delete()){
             $log = new Log;
             $log->user_id = Auth::id();
-            $log->mensagem = 'Excluiu um Tipo de Veículo';
-            $log->table = 'veiculos_tipos';
+            $log->mensagem = 'Excluiu um Tipo de Vínculo';
+            $log->table = 'vinculos_tipos';
             $log->action = 3;
-            $log->fk = $veiculos_tipo->id;
-            $log->object = $veiculos_tipo;
+            $log->fk = $vinculos_tipos->id;
+            $log->object = $vinculos_tipos;
             $log->save();
             return response()->json('Tipo excluído com sucesso!', 200);
           }else{

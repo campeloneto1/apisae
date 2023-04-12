@@ -2,23 +2,24 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\VeiculoTipo;
+use App\Models\LotacaoTipo;
 use App\Models\Log;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class VeiculosTiposController extends Controller
+
+class LotacaoTipoController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        if(!Auth::user()->perfil->veiculos){
+         if(!Auth::user()->perfil->investigacoes_sociais){
             return response()->json('Não Autorizado', 401);
         }
-        return VeiculoTipo::orderBy('nome', 'asc')->get();
+        return LotacaoTipo::orderBy('nome', 'asc')->get();
     }
 
     /**
@@ -29,7 +30,7 @@ class VeiculosTiposController extends Controller
         if(!Auth::user()->perfil->administrador){
             return response()->json('Não Autorizado', 401);
         }
-        $data = new VeiculoTipo;
+        $data = new LotacaoTipo;
 
         $data->nome = $request->nome;   
 
@@ -38,8 +39,8 @@ class VeiculosTiposController extends Controller
         if($data->save()){
             $log = new Log;
             $log->user_id = Auth::id();
-            $log->mensagem = 'Cadastrou um Tipo de Veículo';
-            $log->table = 'veiculos_tipos';
+            $log->mensagem = 'Cadastrou um Tipo de Lotação';
+            $log->table = 'lotacoes_tipos';
             $log->action = 1;
             $log->fk = $data->id;
             $log->object = $data;
@@ -56,37 +57,36 @@ class VeiculosTiposController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(VeiculoTipo $veiculos_tipo)
+    public function show(LotacaoTipo $lotacoes_tipo)
     {
-        if(!Auth::user()->perfil->veiculos){
+        if(!Auth::user()->perfil->investigacoes_sociais){
             return response()->json('Não Autorizado', 401);
         }
-        return $veiculos_tipo;
+        return $lotacoes_tipo;
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, VeiculoTipo $veiculos_tipo)
+    public function update(Request $request, LotacaoTipo $lotacoes_tipo)
     {
-        
         if(!Auth::user()->perfil->administrador){
             return response()->json('Não Autorizado', 401);
         }
-        $dataold = $veiculos_tipo;
+        $dataold = $lotacoes_tipo;
 
-        $veiculos_tipo->nome = $request->nome;   
+        $lotacoes_tipo->nome = $request->nome;   
 
-        $veiculos_tipo->updated_by = Auth::id();      
+        $lotacoes_tipo->updated_by = Auth::id();      
 
-        if($veiculos_tipo->save()){
+        if($lotacoes_tipo->save()){
             $log = new Log;
             $log->user_id = Auth::id();
-            $log->mensagem = 'Editou um Tipo de Veículo';
-            $log->table = 'veiculos_tipos';
+            $log->mensagem = 'Editou um Tipo de Lotação';
+            $log->table = 'lotacoes_tipos';
             $log->action = 2;
-            $log->fk = $veiculos_tipo->id;
-            $log->object = $veiculos_tipo;
+            $log->fk = $lotacoes_tipo->id;
+            $log->object = $lotacoes_tipo;
             $log->object_old = $dataold;
             $log->save();
             return response()->json('Tipo editado com sucesso!', 200);
@@ -101,20 +101,20 @@ class VeiculosTiposController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(VeiculoTipo $veiculos_tipo)
+    public function destroy(LotacaoTipo $lotacoes_tipo)
     {
-        if(!Auth::user()->perfil->administrador){
+         if(!Auth::user()->perfil->administrador){
             return response()->json('Não Autorizado', 401);
         }
                  
-         if($veiculos_tipo->delete()){
+         if($lotacoes_tipo->delete()){
             $log = new Log;
             $log->user_id = Auth::id();
-            $log->mensagem = 'Excluiu um Tipo de Veículo';
-            $log->table = 'veiculos_tipos';
+            $log->mensagem = 'Excluiu um Tipo de Lotação';
+            $log->table = 'lotacoes_tipos';
             $log->action = 3;
-            $log->fk = $veiculos_tipo->id;
-            $log->object = $veiculos_tipo;
+            $log->fk = $lotacoes_tipo->id;
+            $log->object = $lotacoes_tipo;
             $log->save();
             return response()->json('Tipo excluído com sucesso!', 200);
           }else{

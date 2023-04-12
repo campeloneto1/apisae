@@ -23,8 +23,11 @@ use App\Http\Controllers\EstadosController;
 use App\Http\Controllers\GraduacaoController;
 use App\Http\Controllers\InfluenciasController;
 use App\Http\Controllers\InvestigacaoSocialController;
+use App\Http\Controllers\InvestigacaoSocialBoletimController;
+use App\Http\Controllers\InvestigacaoSocialLotacaoController;
 use App\Http\Controllers\InicioController;
 use App\Http\Controllers\LogsController;
+use App\Http\Controllers\LotacaoTipoController;
 use App\Http\Controllers\MarcasController;
 use App\Http\Controllers\ModelosController;
 use App\Http\Controllers\OrganizacoesController;
@@ -37,6 +40,7 @@ use App\Http\Controllers\PerfisController;
 use App\Http\Controllers\PesquisarController;
 use App\Http\Controllers\PessoasController;
 use App\Http\Controllers\PessoasArquivosController;
+use App\Http\Controllers\PessoaVinculoController;
 use App\Http\Controllers\PessoasRedesSociaisController;
 use App\Http\Controllers\PessoasVeiculosController;
 use App\Http\Controllers\RedesSociaisController;
@@ -48,6 +52,7 @@ use App\Http\Controllers\UsersController;
 use App\Http\Controllers\VeiculosController;
 use App\Http\Controllers\VeiculosArquivosController;
 use App\Http\Controllers\VeiculosTiposController;
+use App\Http\Controllers\VinculoTipoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -86,7 +91,10 @@ Route::group(['middleware' => ['auth:api']], function() {
     Route::apiResource('graduacoes', GraduacaoController::class);
     Route::apiResource('influencias', InfluenciasController::class);    
     Route::apiResource('investigacoes-sociais', InvestigacaoSocialController::class);    
+    Route::apiResource('investigacoes-sociais-boletins', InvestigacaoSocialBoletimController::class);    
+    Route::apiResource('investigacoes-sociais-lotacoes', InvestigacaoSocialLotacaoController::class);    
     Route::apiResource('logs', LogsController::class);
+    Route::apiResource('lotacoes-tipos', LotacaoTipoController::class);
     Route::apiResource('marcas', MarcasController::class);
     Route::apiResource('modelos', ModelosController::class);
     Route::apiResource('organizacoes', OrganizacoesController::class);
@@ -98,6 +106,7 @@ Route::group(['middleware' => ['auth:api']], function() {
     Route::apiResource('perfis', PerfisController::class);
     Route::apiResource('pessoas', PessoasController::class);
     Route::apiResource('pessoas-arquivos', PessoasArquivosController::class);
+    Route::apiResource('pessoas-vinculos', PessoaVinculoController::class);
     Route::apiResource('pessoas-redes-sociais', PessoasRedesSociaisController::class);
     Route::apiResource('pessoas-veiculos', PessoasVeiculosController::class);    
     Route::apiResource('redes-sociais', RedesSociaisController::class);
@@ -108,6 +117,7 @@ Route::group(['middleware' => ['auth:api']], function() {
     Route::apiResource('veiculos', VeiculosController::class);
     Route::apiResource('veiculos-arquivos', VeiculosArquivosController::class);
     Route::apiResource('veiculos-tipos', VeiculosTiposController::class);
+    Route::apiResource('vinculos-tipos', VinculoTipoController::class);
 
     Route::get('inicio-quantanalises', [InicioController::class, 'quant_analises']);
     Route::post('pesquisar', [PesquisarController::class, 'pesquisar']);

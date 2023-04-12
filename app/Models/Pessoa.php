@@ -37,7 +37,7 @@ class Pessoa extends Model
      *
      * @var array
      */
-    protected $with = ['sexo', 'cidade', 'redes_sociais', 'influencia', 'cnh_categoria', 'escolaridade', 'naturalidade'];
+    protected $with = ['sexo', 'cidade', 'redes_sociais', 'influencia', 'cnh_categoria', 'escolaridade', 'naturalidade', 'vinculos'];
     
     public function sexo()
     {
@@ -93,6 +93,11 @@ class Pessoa extends Model
     public function arquivos()
     {
         return $this->hasMany(PessoaArquivo::class, 'pessoa_id')->without('pessoa');
+    }
+
+     public function vinculos()
+    {
+        return $this->hasMany(PessoaVinculo::class, 'pessoa_id')->without('pessoa');
     }
 
 

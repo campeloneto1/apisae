@@ -37,12 +37,12 @@ class InvestigacaoSocial extends Model
      *
      * @var array
      */
-    protected $with = ['pessoa', 'graduacao', 'companhia', 'situacao_funcional', 'situacao_tipo', 'comportamento'];
+    protected $with = ['pessoa', 'graduacao', 'companhia', 'situacao_funcional', 'situacao_tipo', 'comportamento', 'boletins', 'lotacoes'];
 
     
     public function pessoa()
     {
-        return $this->belongsTo(Pessoa::class);
+        return $this->belongsTo(Pessoa::class)->with('veiculos');
     }
 
     public function graduacao()
@@ -68,6 +68,16 @@ class InvestigacaoSocial extends Model
     public function comportamento()
     {
         return $this->belongsTo(Comportamento::class);
+    }
+
+    public function boletins()
+    {
+        return $this->hasMany(InvestigacaoSocialBoletim::class, 'investigacao_social_id');
+    }
+
+    public function lotacoes()
+    {
+        return $this->hasMany(InvestigacaoSocialLotacao::class , 'investigacao_social_id');
     }
 
 }

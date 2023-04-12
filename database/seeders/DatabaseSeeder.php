@@ -44,10 +44,12 @@ class DatabaseSeeder extends Seeder
             SituacoesFuncionaisSeeder::class,
             SituacoesTiposSeeder::class,
             ArquivosTiposSeeder::class,
+            LotacoesTiposSeeder::class,
             SexosSeeder::class,
             PaisesSeeder::class,
             EstadosSeeder::class,
             PerfisSeeder::class, 
+            VinculosTiposSeeder::class,          
             UsersSeeder::class,            
         ]);
         Schema::enableForeignKeyConstraints();
