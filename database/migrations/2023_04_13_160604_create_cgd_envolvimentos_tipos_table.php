@@ -12,14 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::disableForeignKeyConstraints();
-        Schema::create('pessoas_redes_sociais', function (Blueprint $table) {
+        Schema::create('cgds_envolvimentos_tipos', function (Blueprint $table) {
             $table->id();
+            $table->string('nome', 50)->unique();
 
-            $table->foreignId('pessoa_id')->nullable()->constrained('pessoas')->onUpdate('cascade')->onDelete('set null');
-            $table->foreignId('rede_social_id')->nullable()->constrained('redes_sociais')->onUpdate('cascade')->onDelete('set null');
-            $table->string('nome', 150);
-            $table->string('foto', 100)->nullable();
-            
             $table->foreignId('created_by')->nullable()->constrained('users')->onUpdate('cascade')->onDelete('set null');
             $table->foreignId('updated_by')->nullable()->constrained('users')->onUpdate('cascade')->onDelete('set null');
 
@@ -33,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('pessoas_redes_sociais');
+        Schema::dropIfExists('cgds_envolvimentos_tipos');
     }
 };

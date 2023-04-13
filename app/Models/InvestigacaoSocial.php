@@ -37,7 +37,7 @@ class InvestigacaoSocial extends Model
      *
      * @var array
      */
-    protected $with = ['pessoa', 'graduacao', 'companhia', 'situacao_funcional', 'situacao_tipo', 'comportamento', 'boletins', 'lotacoes'];
+    protected $with = ['pessoa', 'graduacao', 'companhia', 'situacao_funcional', 'situacao_tipo', 'comportamento'];
 
     
     public function pessoa()
@@ -78,6 +78,11 @@ class InvestigacaoSocial extends Model
     public function lotacoes()
     {
         return $this->hasMany(InvestigacaoSocialLotacao::class , 'investigacao_social_id');
+    }
+
+    public function cgds()
+    {
+        return $this->hasMany(InvestigacaoSocialCgd::class , 'investigacao_social_id');
     }
 
 }

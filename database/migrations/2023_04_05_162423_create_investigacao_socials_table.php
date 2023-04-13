@@ -24,9 +24,6 @@ return new class extends Migration
             $table->foreignId('situacao_tipo_id')->nullable()->constrained('situacoes_tipos')->onUpdate('cascade')->onDelete('set null');
             $table->foreignId('comportamento_id')->nullable()->constrained('comportamentos')->onUpdate('cascade')->onDelete('set null');
 
-            $table->text('lotacoes')->nullable();
-            $table->text('boletins')->nullable();
-            $table->text('cgd')->nullable();
             $table->text('sip')->nullable();
             $table->text('sinesp')->nullable();
             $table->text('tjce')->nullable();

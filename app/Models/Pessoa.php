@@ -71,7 +71,7 @@ class Pessoa extends Model
 
     public function redes_sociais()
     {
-        return $this->belongsToMany(RedeSocial::class, 'pessoas_redes_sociais', 'pessoa_id', 'rede_social_id')->withPivot('id', 'nome')->orderBy('nome');
+        return $this->belongsToMany(RedeSocial::class, 'pessoas_redes_sociais', 'pessoa_id', 'rede_social_id')->withPivot('id', 'nome', 'foto')->orderBy('nome');
     }
 
     public function veiculos()

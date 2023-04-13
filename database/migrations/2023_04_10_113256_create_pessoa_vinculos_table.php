@@ -25,7 +25,7 @@ return new class extends Migration
 
             $table->timestamps();
 
-            $table->unique(['pessoa_id', 'nome']);
+            $table->unique(['pessoa_id', 'cpf']);
         });
         Schema::enableForeignKeyConstraints();
     }

@@ -42,9 +42,6 @@ class InvestigacaoSocialController extends Controller
         $data->situacao_tipo_id = $request->situacao_tipo_id;   
         $data->comportamento_id = $request->comportamento_id;   
 
-        $data->lotacoes = $request->lotacoes;   
-        $data->boletins = $request->boletins;   
-        $data->cgd = $request->cgd; 
         $data->sip = $request->sip;   
         $data->sinesp = $request->sinesp;   
         $data->tjce = $request->tjce;   
@@ -79,7 +76,8 @@ class InvestigacaoSocialController extends Controller
          if(!Auth::user()->perfil->investigacoes_sociais){
             return response()->json('Não Autorizado', 401);
         }
-        return $investigacoes_sociai;
+        //return $investigacoes_sociai;
+        return InvestigacaoSocial::with('boletins','lotacoes', 'cgds')->findOrFail($investigacoes_sociai->id);
     }
 
     /**
@@ -103,9 +101,6 @@ class InvestigacaoSocialController extends Controller
         $investigacoes_sociai->situacao_tipo_id = $request->situacao_tipo_id;   
         $investigacoes_sociai->comportamento_id = $request->comportamento_id;   
 
-        $investigacoes_sociai->lotacoes = $request->lotacoes;   
-        $investigacoes_sociai->boletins = $request->boletins; 
-        $investigacoes_sociai->cgd = $request->cgd;  
         $investigacoes_sociai->sip = $request->sip;   
         $investigacoes_sociai->sinesp = $request->sinesp;   
         $investigacoes_sociai->tjce = $request->tjce;   

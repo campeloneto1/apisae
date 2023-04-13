@@ -2,23 +2,24 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\PessoaRedeSocial;
+use App\Models\CgdEnvolvimentoTipo;
 use App\Models\Log;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class PessoasRedesSociaisController extends Controller
+
+class CgdEnvolvimentoTipoController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        if(!Auth::user()->perfil->pessoas){
+        if(!Auth::user()->perfil->investigacoes_sociais){
             return response()->json('Não Autorizado', 401);
         }
-        return PessoaRedeSocial::orderBy('id', 'desc')->get();
+        return CgdEnvolvimentoTipo::orderBy('nome', 'asc')->get();
     }
 
     /**
@@ -26,28 +27,25 @@ class PessoasRedesSociaisController extends Controller
      */
     public function store(Request $request)
     {
-         if(!Auth::user()->perfil->pessoas){
+        if(!Auth::user()->perfil->administrador){
             return response()->json('Não Autorizado', 401);
         }
-        $data = new PessoaRedeSocial;
+        $data = new CgdEnvolvimentoTipo;
 
-        $data->rede_social_id = $request->rede_social_id;     
-        $data->pessoa_id = $request->pessoa_id; 
-        $data->nome = $request->nome;  
-        $data->foto = $request->foto;  
+        $data->nome = $request->nome;   
 
         $data->created_by = Auth::id();      
 
         if($data->save()){
             $log = new Log;
             $log->user_id = Auth::id();
-            $log->mensagem = 'Cadastrou uma Rede Social na Pessoa';
-            $log->table = 'pessoas_redes_sociais';
+            $log->mensagem = 'Cadastrou um Tipo de Envolvimento  da CGD';
+            $log->table = 'cgd_envolvimentos_tipos';
             $log->action = 1;
             $log->fk = $data->id;
             $log->object = $data;
             $log->save();
-            return response()->json('Rede Social cadastrado com sucesso!', 200);
+            return response()->json('Tipo cadastrado com sucesso!', 200);
         }else{
              $erro = "Não foi possivel realizar o cadastro!";
             $cod = 171;
@@ -59,42 +57,39 @@ class PessoasRedesSociaisController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(PessoaRedeSocial $pessoas_redes_sociai)
+    public function show(CgdEnvolvimentoTipo $cgd_envolvimentos_tipos)
     {
-        if(!Auth::user()->perfil->pessoas){
+        if(!Auth::user()->perfil->investigacoes_sociais){
             return response()->json('Não Autorizado', 401);
         }
-        return $pessoas_redes_sociai;
+        return $cgd_envolvimentos_tipos;
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, PessoaRedeSocial $pessoas_redes_sociai)
+    public function update(Request $request, CgdEnvolvimentoTipo $cgd_envolvimentos_tipos)
     {
-         if(!Auth::user()->perfil->pessoas){
+        if(!Auth::user()->perfil->administrador){
             return response()->json('Não Autorizado', 401);
         }
-        $dataold = $pessoas_redes_sociai;
+        $dataold = $cgd_envolvimentos_tipos;
 
-        $pessoas_redes_sociai->rede_social_id = $request->rede_social_id;     
-        $pessoas_redes_sociai->pessoa_id = $request->pessoa_id; 
-        $pessoas_redes_sociai->nome = $request->nome;  
-        $pessoas_redes_sociai->foto = $request->foto;  
+        $cgd_envolvimentos_tipos->nome = $request->nome;   
 
-        $pessoas_redes_sociai->updated_by = Auth::id();      
+        $cgd_envolvimentos_tipos->updated_by = Auth::id();      
 
-        if($pessoas_redes_sociai->save()){
+        if($cgd_envolvimentos_tipos->save()){
             $log = new Log;
             $log->user_id = Auth::id();
-            $log->mensagem = 'Editou uma Rede Social na Pessoa';
-            $log->table = 'pessoas_redes_sociais';
+            $log->mensagem = 'Editou  um Tipo de Envolvimento  da CGD';
+            $log->table = 'cgd_envolvimentos_tipos';
             $log->action = 2;
-            $log->fk = $pessoas_redes_sociai->id;
-            $log->object = $pessoas_redes_sociai;
+            $log->fk = $cgd_envolvimentos_tipos->id;
+            $log->object = $cgd_envolvimentos_tipos;
             $log->object_old = $dataold;
             $log->save();
-            return response()->json('Rede Social editada com sucesso!', 200);
+            return response()->json('Tipo editado com sucesso!', 200);
         }else{
            $erro = "Não foi possivel realizar a edição!";
             $cod = 171;
@@ -106,22 +101,22 @@ class PessoasRedesSociaisController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(PessoaRedeSocial $pessoas_redes_sociai)
+    public function destroy(CgdEnvolvimentoTipo $cgd_envolvimentos_tipos)
     {
-        if(!Auth::user()->perfil->pessoas){
+        if(!Auth::user()->perfil->administrador){
             return response()->json('Não Autorizado', 401);
         }
                  
-         if($pessoas_redes_sociai->delete()){
+         if($cgd_envolvimentos_tipos->delete()){
             $log = new Log;
             $log->user_id = Auth::id();
-            $log->mensagem = 'Excluiu uma Rede Social na Pessoa';
-            $log->table = 'pessoas_redes_sociais';
+            $log->mensagem = 'Excluiu um Tipo de Envolvimento  da CGD';
+            $log->table = 'cgd_envolvimentos_tipos';
             $log->action = 3;
-            $log->fk = $pessoas_redes_sociai->id;
-            $log->object = $pessoas_redes_sociai;
+            $log->fk = $cgd_envolvimentos_tipos->id;
+            $log->object = $cgd_envolvimentos_tipos;
             $log->save();
-            return response()->json('Rede Social excluído com sucesso!', 200);
+            return response()->json('Tipo excluído com sucesso!', 200);
           }else{
             $erro = "Não foi possivel realizar a exclusão!";
             $cod = 171;

@@ -32,32 +32,29 @@ class DatabaseSeeder extends Seeder
 
         Schema::disableForeignKeyConstraints();
         $this->call([          
+            PaisesSeeder::class,
             //CoresSeeder::class,  
             //InfluenciasSeeder::class, 
             //RedesSociaisSeeder::class, 
+            ArquivosTiposSeeder::class,
             BatalhoesSeeder::class,
+            CgdEnvolvimentoTipoSeeder::class,
+            CgdProcessoTipoSeeder::class,
+            CgdSituacaoTipoSeeder::class,
             CnhCategoriasSeeder::class,
             CompanhiasSeeder::class,
             ComportamentosSeeder::class,
             EscolaridadesSeeder::class,
+            EstadosSeeder::class,
             GraduacoesSeeder::class,
+            LotacoesTiposSeeder::class,
+            PerfisSeeder::class, 
+            SexosSeeder::class,
             SituacoesFuncionaisSeeder::class,
             SituacoesTiposSeeder::class,
-            ArquivosTiposSeeder::class,
-            LotacoesTiposSeeder::class,
-            SexosSeeder::class,
-            PaisesSeeder::class,
-            EstadosSeeder::class,
-            PerfisSeeder::class, 
-            VinculosTiposSeeder::class,          
-            UsersSeeder::class,            
+            VinculosTiposSeeder::class,    
+            UsersSeeder::class,         
         ]);
         Schema::enableForeignKeyConstraints();
-        // \App\Models\User::factory(10)->create();
-
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
     }
 }
