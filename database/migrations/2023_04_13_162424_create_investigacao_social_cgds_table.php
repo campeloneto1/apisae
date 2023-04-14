@@ -19,7 +19,7 @@ return new class extends Migration
             $table->foreignId('cgd_processo_tipo_id')->nullable()->constrained('cgds_processos_tipos')->onUpdate('cascade')->onDelete('set null');
             $table->foreignId('cgd_situacao_tipo_id')->nullable()->constrained('cgds_situacoes_tipos')->onUpdate('cascade')->onDelete('set null');
             $table->string('spu', 50); 
-            $table->text('observacao')->nullable();
+            $table->text('descricao')->nullable();
 
             $table->foreignId('created_by')->nullable()->constrained('users')->onUpdate('cascade')->onDelete('set null');
             $table->foreignId('updated_by')->nullable()->constrained('users')->onUpdate('cascade')->onDelete('set null');

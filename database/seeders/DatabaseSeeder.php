@@ -47,6 +47,7 @@ class DatabaseSeeder extends Seeder
             EscolaridadesSeeder::class,
             EstadosSeeder::class,
             GraduacoesSeeder::class,
+            InvestigacaoSocialStatusSeeder::class,
             LotacoesTiposSeeder::class,
             PerfisSeeder::class, 
             SexosSeeder::class,

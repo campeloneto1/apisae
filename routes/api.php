@@ -29,6 +29,7 @@ use App\Http\Controllers\InvestigacaoSocialController;
 use App\Http\Controllers\InvestigacaoSocialBoletimController;
 use App\Http\Controllers\InvestigacaoSocialCgdController;
 use App\Http\Controllers\InvestigacaoSocialLotacaoController;
+use App\Http\Controllers\InvestigacaoSocialStatusController;
 use App\Http\Controllers\InicioController;
 use App\Http\Controllers\LogsController;
 use App\Http\Controllers\LotacaoTipoController;
@@ -99,8 +100,9 @@ Route::group(['middleware' => ['auth:api']], function() {
     Route::apiResource('influencias', InfluenciasController::class);    
     Route::apiResource('investigacoes-sociais', InvestigacaoSocialController::class);    
     Route::apiResource('investigacoes-sociais-boletins', InvestigacaoSocialBoletimController::class);  
-     Route::apiResource('investigacoes-sociais-cgds', InvestigacaoSocialCgdController::class);   
-    Route::apiResource('investigacoes-sociais-lotacoes', InvestigacaoSocialLotacaoController::class);    
+    Route::apiResource('investigacoes-sociais-cgds', InvestigacaoSocialCgdController::class);   
+    Route::apiResource('investigacoes-sociais-lotacoes', InvestigacaoSocialLotacaoController::class);
+    Route::apiResource('investigacoes-sociais-status', InvestigacaoSocialStatusController::class);    
     Route::apiResource('logs', LogsController::class);
     Route::apiResource('lotacoes-tipos', LotacaoTipoController::class);
     Route::apiResource('marcas', MarcasController::class);
@@ -128,10 +130,14 @@ Route::group(['middleware' => ['auth:api']], function() {
     Route::apiResource('vinculos-tipos', VinculoTipoController::class);
 
     Route::get('inicio-quantanalises', [InicioController::class, 'quant_analises']);
+    Route::get('inicio-quantinvestigacoes', [InicioController::class, 'quant_investigacoes']);
+    Route::get('inicio-ultimasinvestigacoes', [InicioController::class, 'ultimas_investigacoes']);
+    Route::post('investigacoes-sociais-changestatus', [InvestigacaoSocialController::class, 'change_status']);
     Route::post('pesquisar', [PesquisarController::class, 'pesquisar']);
 
     Route::get('batalhoes/{id}/companhias', [BatalhaoController::class, 'where']);
     Route::get('estados/{id}/cidades', [EstadosController::class, 'where']);
+
     Route::get('marcas/{id}/modelos', [MarcasController::class, 'where']);
     Route::get('paises/{id}/estados', [PaisesController::class, 'where']);
     Route::get('pessoas/{cpf}/checkCpf', [PessoasController::class, 'checkCpf']);

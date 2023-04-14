@@ -11,6 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
+         Schema::disableForeignKeyConstraints();
         Schema::create('investigacoes_sociais', function (Blueprint $table) {
             $table->id();
             $table->foreignId('pessoa_id')->nullable()->unique()->constrained('pessoas')->onUpdate('cascade')->onDelete('set null');
@@ -30,11 +31,18 @@ return new class extends Migration
             $table->text('fontes_abertas')->nullable();
             $table->text('informacoes_adicionais')->nullable();
 
+            $table->foreignId('indicou_id')->nullable()->constrained('pessoas')->onUpdate('cascade')->onDelete('set null');
+            
+            $table->foreignId('investigacao_social_status_id')->nullable()->constrained('investigacoes_sociais_status')->onUpdate('cascade')->onDelete('set null');
+            $table->string('bcg_transferencia')->nullable();            
+            $table->foreignId('encaminhou_id')->nullable()->constrained('users')->onUpdate('cascade')->onDelete('set null');
+
             $table->foreignId('created_by')->nullable()->constrained('users')->onUpdate('cascade')->onDelete('set null');
             $table->foreignId('updated_by')->nullable()->constrained('users')->onUpdate('cascade')->onDelete('set null');
 
             $table->timestamps();
         });
+        Schema::enableForeignKeyConstraints();
     }
 
     /**

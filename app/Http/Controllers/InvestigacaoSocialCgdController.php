@@ -37,7 +37,7 @@ class InvestigacaoSocialCgdController extends Controller
         $data->cgd_processo_tipo_id = $request->cgd_processo_tipo_id;   
         $data->cgd_situacao_tipo_id = $request->cgd_situacao_tipo_id;  
         $data->spu = $request->spu;   
-        $data->observacao = $request->observacao;   
+        $data->descricao = $request->descricao;   
 
         $data->created_by = Auth::id();      
 
@@ -85,7 +85,7 @@ class InvestigacaoSocialCgdController extends Controller
         $investigacoes_sociais_cgd->cgd_processo_tipo_id = $request->cgd_processo_tipo_id;   
         $investigacoes_sociais_cgd->cgd_situacao_tipo_id = $request->cgd_situacao_tipo_id;  
         $investigacoes_sociais_cgd->spu = $request->spu;   
-        $investigacoes_sociais_cgd->observacao = $request->observacao;                    
+        $investigacoes_sociais_cgd->descricao = $request->descricao;                    
 
         $investigacoes_sociais_cgd->updated_by = Auth::id();      
 

@@ -46,7 +46,11 @@ class InvestigacaoSocialController extends Controller
         $data->sinesp = $request->sinesp;   
         $data->tjce = $request->tjce;   
         $data->fontes_abertas = $request->fontes_abertas; 
-        $data->informacoes_adicionais = $request->informacoes_adicionais;   
+        $data->informacoes_adicionais = $request->informacoes_adicionais;  
+
+        $data->indicou_id = $request->indicou_id;   
+
+        $data->investigacao_social_status_id = 1;   
 
         $data->created_by = Auth::id();      
 
@@ -107,6 +111,8 @@ class InvestigacaoSocialController extends Controller
         $investigacoes_sociai->fontes_abertas = $request->fontes_abertas; 
         $investigacoes_sociai->informacoes_adicionais = $request->informacoes_adicionais;
 
+        $investigacoes_sociai->indicou_id = $request->indicou_id;
+
         $investigacoes_sociai->updated_by = Auth::id();      
 
         if($investigacoes_sociai->save()){
@@ -131,7 +137,7 @@ class InvestigacaoSocialController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(InvestigacaoSocial $investigacoes_sociai)
+    public function destroy( InvestigacaoSocial $investigacoes_sociai)
     {
         if(!Auth::user()->perfil->administrador){
             return response()->json('Não Autorizado', 401);
@@ -152,6 +158,45 @@ class InvestigacaoSocialController extends Controller
             $cod = 171;
             $resposta = ['erro' => $erro, 'cod' => $cod];
             return response()->json($resposta, 404);
+          }
+    }
+
+     /**
+     * Change status.
+     */
+    public function change_status(Request $request)
+    {
+        if(!Auth::user()->perfil->investigacoes_sociais){
+            return response()->json('Não Autorizado', 401);
+        }
+
+        $investigacao = InvestigacaoSocial::find($request->investigacao_social_id);
+
+        if($request->investigacao_social_status_id){
+            $investigacao->investigacao_social_status_id = $request->investigacao_social_status_id;
+        }
+        if($request->encaminhou_id){
+            $investigacao->encaminhou_id = $request->encaminhou_id;
+        } 
+
+        if($request->bcg_transferencia){
+            $investigacao->bcg_transferencia = $request->bcg_transferencia;
+        }     
+        if($investigacao->save()){
+            $log = new Log;
+            $log->user_id = Auth::id();
+            $log->mensagem = 'Alterou o Status da Investigação Social';
+            $log->table = 'investigacoes_sociais';
+            $log->action = 3;
+            $log->fk = $investigacao->id;
+            $log->object = $investigacao;
+            $log->save();
+            return response()->json('Status alterado com sucesso!', 200);
+        }else{
+            $erro = "Não foi possivel realizar a alteração!";
+            $cod = 171;
+            $resposta = ['erro' => $erro, 'cod' => $cod];
+          return response()->json($resposta, 404);
           }
     }
 }
