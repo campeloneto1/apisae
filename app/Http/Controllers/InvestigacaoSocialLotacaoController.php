@@ -43,7 +43,7 @@ class InvestigacaoSocialLotacaoController extends Controller
             $log = new Log;
             $log->user_id = Auth::id();
             $log->mensagem = 'Cadastrou uma Lotação na Investigação Social';
-            $log->table = 'investigacoes_sociais_lotacoes';
+            $log->table = 'investigacoes_sociais_lotacos';
             $log->action = 1;
             $log->fk = $data->id;
             $log->object = $data;
@@ -60,40 +60,40 @@ class InvestigacaoSocialLotacaoController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(InvestigacaoSocialLotacao $investigacoes_sociais_lotacoe)
+    public function show(InvestigacaoSocialLotacao $investigacoes_sociais_lotaco)
     {
         if(!Auth::user()->perfil->investigacoes_sociais){
             return response()->json('Não Autorizado', 401);
         }
-        return $investigacoes_sociais_lotacoe;
+        return $investigacoes_sociais_lotaco;
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, InvestigacaoSocialLotacao $investigacoes_sociais_lotacoe)
+    public function update(Request $request, InvestigacaoSocialLotacao $investigacoes_sociais_lotaco)
     {
         if(!Auth::user()->perfil->investigacoes_sociais){
             return response()->json('Não Autorizado', 401);
         }
-        $dataold = $investigacoes_sociais_lotacoe;
+        $dataold = $investigacoes_sociais_lotaco;
 
-        $investigacoes_sociais_lotacoe->investigacao_social_id = $request->investigacao_social_id; 
-        $investigacoes_sociais_lotacoe->bcg = $request->bcg;  
-        $investigacoes_sociais_lotacoe->lotacao_tipo_id = $request->lotacao_tipo_id;   
-        $investigacoes_sociais_lotacoe->data = $request->data;  
-        $investigacoes_sociais_lotacoe->companhia_id = $request->companhia_id;                   
+        $investigacoes_sociais_lotaco->investigacao_social_id = $request->investigacao_social_id; 
+        $investigacoes_sociais_lotaco->bcg = $request->bcg;  
+        $investigacoes_sociais_lotaco->lotacao_tipo_id = $request->lotacao_tipo_id;   
+        $investigacoes_sociais_lotaco->data = $request->data;  
+        $investigacoes_sociais_lotaco->companhia_id = $request->companhia_id;                   
 
-        $investigacoes_sociais_lotacoe->updated_by = Auth::id();      
+        $investigacoes_sociais_lotaco->updated_by = Auth::id();      
 
-        if($investigacoes_sociais_lotacoe->save()){
+        if($investigacoes_sociais_lotaco->save()){
             $log = new Log;
             $log->user_id = Auth::id();
             $log->mensagem = 'Editou uma Lotação da Investigação Social';
-            $log->table = 'investigacoes_sociais_lotacoes';
+            $log->table = 'investigacoes_sociais_lotacos';
             $log->action = 2;
-            $log->fk = $investigacoes_sociais_lotacoe->id;
-            $log->object = $investigacoes_sociais_lotacoe;
+            $log->fk = $investigacoes_sociais_lotaco->id;
+            $log->object = $investigacoes_sociais_lotaco;
             $log->object_old = $dataold;
             $log->save();
             return response()->json('Lotação editada com sucesso!', 200);
@@ -108,20 +108,20 @@ class InvestigacaoSocialLotacaoController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(InvestigacaoSocialLotacao $investigacoes_sociais_lotacoe)
+    public function destroy(InvestigacaoSocialLotacao $investigacoes_sociais_lotaco)
     {
         if(!Auth::user()->perfil->investigacoes_sociais){
             return response()->json('Não Autorizado', 401);
         }
                  
-         if($investigacoes_sociais_lotacoe->delete()){
+         if($investigacoes_sociais_lotaco->delete()){
             $log = new Log;
             $log->user_id = Auth::id();
             $log->mensagem = 'Excluiu uma Lotação da Investigação Social';
-            $log->table = 'investigacoes_sociais_lotacoes';
+            $log->table = 'investigacoes_sociais_lotacos';
             $log->action = 3;
-            $log->fk = $investigacoes_sociais_lotacoe->id;
-            $log->object = $investigacoes_sociais_lotacoe;
+            $log->fk = $investigacoes_sociais_lotaco->id;
+            $log->object = $investigacoes_sociais_lotaco;
             $log->save();
             return response()->json('Lotação excluída com sucesso!', 200);
           }else{

@@ -100,4 +100,9 @@ class InvestigacaoSocial extends Model
         return $this->hasMany(InvestigacaoSocialCgd::class , 'investigacao_social_id');
     }
 
+    public function arquivos()
+    {
+        return $this->hasMany(InvestigacaoSocialArquivo::class , 'investigacao_social_id');
+    }
+
 }

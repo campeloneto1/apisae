@@ -38,7 +38,7 @@ class PessoaArquivo extends Model
      *
      * @var array
      */
-    protected $with = ['arquivo_tipo', 'pessoa'];
+    protected $with = ['arquivo_tipo'];
 
     
     public function pessoa()

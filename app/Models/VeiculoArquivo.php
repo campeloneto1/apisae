@@ -38,7 +38,7 @@ class VeiculoArquivo extends Model
      *
      * @var array
      */
-    protected $with = ['veiculo', 'arquivo_tipo'];
+    protected $with = [ 'arquivo_tipo'];
 
     
     public function veiculo()

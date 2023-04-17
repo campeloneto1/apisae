@@ -115,7 +115,7 @@ class PessoasArquivosController extends Controller
                  
          if($pessoas_arquivo->delete()){
             //Storage::delete('app/public/'.$pessoas_arquivo->nome);
-            unlink(storage_path('app/public/'.$pessoas_arquivo->nome));
+            unlink(storage_path('app/public/'.$pessoas_arquivo->arquivo));
             $log = new Log;
             $log->user_id = Auth::id();
             $log->mensagem = 'Excluiu um Arquivo na Pessoa';

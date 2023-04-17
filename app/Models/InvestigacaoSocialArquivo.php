@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class OrganizacaoArquivo extends Model
+class InvestigacaoSocialArquivo extends Model
 {
     use HasFactory;
 
@@ -14,7 +14,7 @@ class OrganizacaoArquivo extends Model
      *
      * @var string
      */
-    protected $table = 'organizacoes_arquivos';
+    protected $table = 'investigacoes_sociais_arquivos';
 
     /**
      * The attributes that are mass assignable.
@@ -41,9 +41,9 @@ class OrganizacaoArquivo extends Model
     protected $with = ['arquivo_tipo'];
 
     
-    public function organizacao()
+    public function investigacao_social()
     {
-        return $this->belongsTo(Organizacao::class);
+        return $this->belongsTo(InvestigacaoSocial::class);
     }
 
     public function arquivo_tipo()

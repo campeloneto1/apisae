@@ -16,12 +16,12 @@ return new class extends Migration
             $table->id();
             $table->string('nome', 50)->unique();
 
-            $table->boolean('foto')->default(0);
-            $table->boolean('video')->default(0);
-            $table->boolean('texto')->default(0);
-            $table->boolean('pdf')->default(0);
-            $table->boolean('audio')->default(0);
-            $table->boolean('link')->default(0);
+            $table->boolean('foto')->nullable();
+            $table->boolean('video')->nullable();
+            $table->boolean('texto')->nullable();
+            $table->boolean('pdf')->nullable();
+            $table->boolean('audio')->nullable();
+            $table->boolean('link')->nullable();
 
             $table->foreignId('created_by')->nullable()->constrained('users')->onUpdate('cascade')->onDelete('set null');
             $table->foreignId('updated_by')->nullable()->constrained('users')->onUpdate('cascade')->onDelete('set null');

@@ -61,6 +61,7 @@ class PesquisarController extends Controller
             ->orWhere('rua', 'like', '%'.$request->pesquisar.'%')
             ->orWhere('complemento', 'like', '%'.$request->pesquisar.'%')
             ->orWhere('observacao', 'like', '%'.$request->pesquisar.'%')
+            ->orWhereRelation('redes_sociais', 'pessoas_redes_sociais.nome', 'like', '%'.$request->pesquisar.'%')
             ->orWhereRelation('vinculos', 'nome', 'like', '%'.$request->pesquisar.'%')
             ->orWhereRelation('vinculos', 'cpf', 'like', '%'.$request->pesquisar.'%')
             ->orWhereRelation('veiculos', 'placa', 'like', '%'.$request->pesquisar.'%')

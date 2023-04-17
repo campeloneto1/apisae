@@ -16,7 +16,8 @@ class RedesSociaisSeeder extends Seeder
         $init = [
             0 => ['nome' => 'Facebook'],
             1 => ['nome' => 'Instagram'],
-            2 => ['nome' => 'Twitter']
+            2 => ['nome' => 'Twitter'],
+            2 => ['nome' => 'Youtube']
         ];
         DB::table('redes_sociais')->insert($init);
     }

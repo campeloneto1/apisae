@@ -113,6 +113,7 @@ class VeiculosArquivosController extends Controller
         }
                  
          if($veiculos_arquivo->delete()){
+            unlink(storage_path('app/public/'.$veiculos_arquivo->arquivo));
             $log = new Log;
             $log->user_id = Auth::id();
             $log->mensagem = 'Excluiu um Arquivo no Veículo';

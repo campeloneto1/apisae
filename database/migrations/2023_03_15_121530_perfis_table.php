@@ -15,42 +15,40 @@ return new class extends Migration
         Schema::create('perfis', function (Blueprint $table) {
             $table->id();
             $table->string('nome', 100)->unique();   
-            $table->boolean('administrador')->default(0);
-            $table->boolean('gestor')->default(0);
-            $table->boolean('restrito')->default(0);
-            $table->boolean('relatorios')->default(0);       
+            $table->boolean('administrador')->nullable();
+            $table->boolean('gestor')->nullable();
+            $table->boolean('restrito')->nullable();
+            $table->boolean('relatorios')->nullable();       
 
-            $table->boolean('users')->default(0);        
-            $table->boolean('users_cad')->default(0);  
-            $table->boolean('users_edt')->default(0);  
-            $table->boolean('users_del')->default(0);     
+            $table->boolean('users')->nullable();        
+            $table->boolean('users_cad')->nullable();  
+            $table->boolean('users_edt')->nullable();  
+            $table->boolean('users_del')->nullable();     
 
-            $table->boolean('analises')->default(0);        
-            $table->boolean('analises_cad')->default(0);  
-            $table->boolean('analises_edt')->default(0);  
-            $table->boolean('analises_del')->default(0);            
+            $table->boolean('analises')->nullable();        
+            $table->boolean('analises_cad')->nullable();  
+            $table->boolean('analises_edt')->nullable();  
+            $table->boolean('analises_del')->nullable();            
 
-            $table->boolean('organizacoes')->default(0);        
-            $table->boolean('organizacoes_cad')->default(0);  
-            $table->boolean('organizacoes_edt')->default(0);  
-            $table->boolean('organizacoes_del')->default(0);  
+            $table->boolean('organizacoes')->nullable();        
+            $table->boolean('organizacoes_cad')->nullable();  
+            $table->boolean('organizacoes_edt')->nullable();  
+            $table->boolean('organizacoes_del')->nullable();  
 
-            $table->boolean('pessoas')->default(0);        
-            $table->boolean('pessoas_cad')->default(0);  
-            $table->boolean('pessoas_edt')->default(0);  
-            $table->boolean('pessoas_del')->default(0);  
+            $table->boolean('pessoas')->nullable();        
+            $table->boolean('pessoas_cad')->nullable();  
+            $table->boolean('pessoas_edt')->nullable();  
+            $table->boolean('pessoas_del')->nullable();  
 
-            $table->boolean('investigacoes_sociais')->default(0);        
-            $table->boolean('investigacoes_sociais_cad')->default(0);  
-            $table->boolean('investigacoes_sociais_edt')->default(0);  
-            $table->boolean('investigacoes_sociais_del')->default(0);   
+            $table->boolean('investigacoes_sociais')->nullable();        
+            $table->boolean('investigacoes_sociais_cad')->nullable();  
+            $table->boolean('investigacoes_sociais_edt')->nullable();  
+            $table->boolean('investigacoes_sociais_del')->nullable();   
 
-            $table->boolean('veiculos')->default(0);        
-            $table->boolean('veiculos_cad')->default(0);  
-            $table->boolean('veiculos_edt')->default(0);  
-            $table->boolean('veiculos_del')->default(0);                          
-
-               
+            $table->boolean('veiculos')->nullable();        
+            $table->boolean('veiculos_cad')->nullable();  
+            $table->boolean('veiculos_edt')->nullable();  
+            $table->boolean('veiculos_del')->nullable();                          
 
             $table->foreignId('created_by')->nullable()->constrained('users')->onUpdate('cascade')->onDelete('set null');
             $table->foreignId('updated_by')->nullable()->constrained('users')->onUpdate('cascade')->onDelete('set null');

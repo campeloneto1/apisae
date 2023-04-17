@@ -20,7 +20,7 @@ return new class extends Migration
             $table->foreignId('arquivo_tipo_id')->nullable()->constrained('arquivos_tipos')->onUpdate('cascade')->onDelete('set null');
             //$table->date('data')->nullable();
             //$table->time('hora')->nullable();
-
+            $table->boolean('restrito')->nullable();
             $table->foreignId('created_by')->nullable()->constrained('users')->onUpdate('cascade')->onDelete('set null');
             $table->foreignId('updated_by')->nullable()->constrained('users')->onUpdate('cascade')->onDelete('set null');
 

@@ -114,6 +114,7 @@ class AnalisesArquivosController extends Controller
         }
                  
          if($analises_arquivo->delete()){
+            unlink(storage_path('app/public/'.$analises_arquivo->arquivo));
             $log = new Log;
             $log->user_id = Auth::id();
             $log->mensagem = 'Excluiu um Arquivo da Analise';

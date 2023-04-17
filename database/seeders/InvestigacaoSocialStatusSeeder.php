@@ -19,8 +19,8 @@ class InvestigacaoSocialStatusSeeder extends Seeder
             2 => [ 'nome' => 'Encaminhado', 'andamento' => 0, 'concluido' => 0, 'encaminhado' => 1, 'aprovado' => 0, 'recusado' => 0, 'aguardando' => 0, 'transferido' => 0 ],
             3 => [ 'nome' => 'Aprovado', 'andamento' => 0, 'concluido' => 0, 'encaminhado' => 0, 'aprovado' => 1, 'recusado' => 0, 'aguardando' => 0, 'transferido' => 0 ],
             4 => [ 'nome' => 'Recusado', 'andamento' => 0, 'concluido' => 0, 'encaminhado' => 0, 'aprovado' => 0, 'recusado' => 1, 'aguardando' => 0, 'transferido' => 0 ],
-            5 => [ 'nome' => 'Aguardando Transf.', 'andamento' => 0, 'concluido' => 0, 'encaminhado' => 0, 'aprovado' => 0, 'recusado' => 0, 'aguardando' => 0, 'transferido' => 0 ],
-            6 => [ 'nome' => 'Transferido', 'andamento' => 1, 'concluido' => 0, 'encaminhado' => 0, 'aprovado' => 0, 'recusado' => 0, 'aguardando' => 0, 'transferido' => 1 ],
+            5 => [ 'nome' => 'Aguardando Transf.', 'andamento' => 0, 'concluido' => 0, 'encaminhado' => 0, 'aprovado' => 0, 'recusado' => 0, 'aguardando' => 1, 'transferido' => 0 ],
+            6 => [ 'nome' => 'Transferido', 'andamento' => 0, 'concluido' => 0, 'encaminhado' => 0, 'aprovado' => 0, 'recusado' => 0, 'aguardando' => 0, 'transferido' => 1 ],
           
         ];
         DB::table('investigacoes_sociais_status')->insert($init);    

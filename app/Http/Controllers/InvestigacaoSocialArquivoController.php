@@ -2,23 +2,23 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\OrganizacaoArquivo;
+use App\Models\InvestigacaoSocialArquivo;
 use App\Models\Log;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class OrganizacoesArquivosController extends Controller
+class InvestigacaoSocialArquivoController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        if(!Auth::user()->perfil->organizacoes){
+        if(!Auth::user()->perfil->investigacoes_sociais){
             return response()->json('Não Autorizado', 401);
         }
-        return OrganizacaoArquivo::orderBy('id', 'desc')->get();
+        return InvestigacaoSocialArquivo::orderBy('id', 'desc')->get();
     }
 
     /**
@@ -26,12 +26,12 @@ class OrganizacoesArquivosController extends Controller
      */
     public function store(Request $request)
     {
-        if(!Auth::user()->perfil->organizacoes){
+        if(!Auth::user()->perfil->investigacoes_sociais){
             return response()->json('Não Autorizado', 401);
         }
-        $data = new OrganizacaoArquivo;
+        $data = new InvestigacaoSocialArquivo;
 
-        $data->organizacao_id = $request->organizacao_id;     
+        $data->investigacao_social_id = $request->investigacao_social_id;     
         $data->nome = $request->nome;   
         $data->arquivo = $request->arquivo;   
         $data->arquivo_tipo_id = $request->arquivo_tipo_id;   
@@ -41,8 +41,8 @@ class OrganizacoesArquivosController extends Controller
         if($data->save()){
             $log = new Log;
             $log->user_id = Auth::id();
-            $log->mensagem = 'Cadastrou um Arquivo na Organização';
-            $log->table = 'organizacoes_arquivos';
+            $log->mensagem = 'Cadastrou um Arquivo na Investigacao Social';
+            $log->table = 'investigacoes_sociais_arquivos';
             $log->action = 1;
             $log->fk = $data->id;
             $log->object = $data;
@@ -59,39 +59,39 @@ class OrganizacoesArquivosController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(OrganizacaoArquivo $organizacoes_arquivo)
+    public function show(InvestigacaoSocialArquivo $investigacoes_sociais_arquivo)
     {
-        if(!Auth::user()->perfil->organizacoes){
+        if(!Auth::user()->perfil->investigacoes_sociais){
             return response()->json('Não Autorizado', 401);
         }
-        return $organizacoes_arquivo;
+        return $investigacoes_sociais_arquivo;
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, OrganizacaoArquivo $organizacoes_arquivo)
+    public function update(Request $request, InvestigacaoSocialArquivo $investigacoes_sociais_arquivo)
     {
-        if(!Auth::user()->perfil->organizacoes){
+        if(!Auth::user()->perfil->investigacoes_sociais){
             return response()->json('Não Autorizado', 401);
         }
-        $dataold = $organizacoes_arquivo;
+        $dataold = $investigacoes_sociais_arquivo;
 
-        $organizacoes_arquivo->analise_id = $request->analise_id;     
-        $organizacoes_arquivo->nome = $request->nome;  
-        $organizacoes_arquivo->arquivo = $request->arquivo;   
-        $organizacoes_arquivo->arquivo_tipo_id = $request->arquivo_tipo_id;   
+        $investigacoes_sociais_arquivo->analise_id = $request->analise_id;     
+        $investigacoes_sociais_arquivo->nome = $request->nome;  
+        $investigacoes_sociais_arquivo->arquivo = $request->arquivo;   
+        $investigacoes_sociais_arquivo->arquivo_tipo_id = $request->arquivo_tipo_id;   
 
-        $organizacoes_arquivo->updated_by = Auth::id();      
+        $investigacoes_sociais_arquivo->updated_by = Auth::id();      
 
-        if($organizacoes_arquivo->save()){
+        if($investigacoes_sociais_arquivo->save()){
             $log = new Log;
             $log->user_id = Auth::id();
-            $log->mensagem = 'Editou um Arquivo na Organização';
-            $log->table = 'organizacoes_arquivos';
+            $log->mensagem = 'Editou um Arquivo na Investigação Social';
+            $log->table = 'investigacoes_sociais_arquivos';
             $log->action = 2;
-            $log->fk = $organizacoes_arquivo->id;
-            $log->object = $organizacoes_arquivo;
+            $log->fk = $investigacoes_sociais_arquivo->id;
+            $log->object = $investigacoes_sociais_arquivo;
             $log->object_old = $dataold;
             $log->save();
             return response()->json('Arquivo editado com sucesso!', 200);
@@ -106,21 +106,21 @@ class OrganizacoesArquivosController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(OrganizacaoArquivo $organizacoes_arquivo)
+    public function destroy(InvestigacaoSocialArquivo $investigacoes_sociais_arquivo)
     {
-        if(!Auth::user()->perfil->organizacoes){
+        if(!Auth::user()->perfil->investigacoes_sociais){
             return response()->json('Não Autorizado', 401);
         }
                  
-         if($organizacoes_arquivo->delete()){
-            unlink(storage_path('app/public/'.$organizacoes_arquivo->arquivo));
+         if($investigacoes_sociais_arquivo->delete()){
+            unlink(storage_path('app/public/'.$investigacoes_sociais_arquivo->arquivo));
             $log = new Log;
             $log->user_id = Auth::id();
-            $log->mensagem = 'Excluiu um Arquivo na Organização';
-            $log->table = 'organizacoes_arquivos';
+            $log->mensagem = 'Excluiu um Arquivo na Investigação Social';
+            $log->table = 'investigacoes_sociais_arquivos';
             $log->action = 3;
-            $log->fk = $organizacoes_arquivo->id;
-            $log->object = $organizacoes_arquivo;
+            $log->fk = $investigacoes_sociais_arquivo->id;
+            $log->object = $investigacoes_sociais_arquivo;
             $log->save();
             return response()->json('Arquivo excluído com sucesso!', 200);
           }else{

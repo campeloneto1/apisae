@@ -81,7 +81,7 @@ class InvestigacaoSocialController extends Controller
             return response()->json('Não Autorizado', 401);
         }
         //return $investigacoes_sociai;
-        return InvestigacaoSocial::with('boletins','lotacoes', 'cgds')->findOrFail($investigacoes_sociai->id);
+        return InvestigacaoSocial::with('boletins','lotacoes', 'cgds', 'arquivos')->findOrFail($investigacoes_sociai->id);
     }
 
     /**

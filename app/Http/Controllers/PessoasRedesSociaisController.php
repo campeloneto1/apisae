@@ -113,6 +113,7 @@ class PessoasRedesSociaisController extends Controller
         }
                  
          if($pessoas_redes_sociai->delete()){
+            unlink(storage_path('app/public/'.$pessoas_redes_sociai->foto));
             $log = new Log;
             $log->user_id = Auth::id();
             $log->mensagem = 'Excluiu uma Rede Social na Pessoa';

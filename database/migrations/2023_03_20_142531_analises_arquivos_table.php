@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('nome', 250);   
             $table->string('arquivo', 100)->unique();   
             $table->foreignId('arquivo_tipo_id')->nullable()->constrained('arquivos_tipos')->onUpdate('cascade')->onDelete('set null');
+            $table->boolean('restrito')->nullable();
             //$table->date('data')->nullable();
             //$table->time('hora')->nullable();
 

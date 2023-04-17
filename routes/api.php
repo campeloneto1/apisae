@@ -26,6 +26,7 @@ use App\Http\Controllers\EstadosController;
 use App\Http\Controllers\GraduacaoController;
 use App\Http\Controllers\InfluenciasController;
 use App\Http\Controllers\InvestigacaoSocialController;
+use App\Http\Controllers\InvestigacaoSocialArquivoController;
 use App\Http\Controllers\InvestigacaoSocialBoletimController;
 use App\Http\Controllers\InvestigacaoSocialCgdController;
 use App\Http\Controllers\InvestigacaoSocialLotacaoController;
@@ -98,7 +99,8 @@ Route::group(['middleware' => ['auth:api']], function() {
     Route::apiResource('estados', EstadosController::class);
     Route::apiResource('graduacoes', GraduacaoController::class);
     Route::apiResource('influencias', InfluenciasController::class);    
-    Route::apiResource('investigacoes-sociais', InvestigacaoSocialController::class);    
+    Route::apiResource('investigacoes-sociais', InvestigacaoSocialController::class);
+    Route::apiResource('investigacoes-sociais-arquivos', InvestigacaoSocialArquivoController::class);      
     Route::apiResource('investigacoes-sociais-boletins', InvestigacaoSocialBoletimController::class);  
     Route::apiResource('investigacoes-sociais-cgds', InvestigacaoSocialCgdController::class);   
     Route::apiResource('investigacoes-sociais-lotacoes', InvestigacaoSocialLotacaoController::class);
