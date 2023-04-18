@@ -167,4 +167,32 @@ class UsersController extends Controller
             return response()->json($resposta, 404);
           }
     }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function change_pass(Request $request)
+    {
+       
+        $user = User::findOrFail(Auth::id());
+
+        $user->password = bcrypt($request->senha);
+                 
+         if($user->save()){
+            $log = new Log;
+            $log->user_id = Auth::id();
+            $log->mensagem = 'Alterou sua senha';
+            $log->table = 'users';
+            $log->action = 2;
+            $log->fk = $user->id;
+            $log->object = $user;
+            $log->save();
+            return response()->json('Senha alterada com sucesso!', 200);
+          }else{
+            $erro = "Não foi possivel realizar a alteração!";
+            $cod = 171;
+            $resposta = ['erro' => $erro, 'cod' => $cod];
+            return response()->json($resposta, 404);
+          }
+    }
 }

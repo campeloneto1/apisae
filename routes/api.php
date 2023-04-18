@@ -148,4 +148,6 @@ Route::group(['middleware' => ['auth:api']], function() {
     Route::post('upload-image', [SistemaController::class, 'uploadFoto']);
     Route::post('upload-arquivo', [ArquivosController::class, 'uploadArquivo']);
     Route::post('upload-foto', [PessoasController::class, 'uploadFoto']);
+
+    Route::post('users-changpass', [UsersController::class, 'change_pass']);
 });

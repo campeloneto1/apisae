@@ -127,6 +127,11 @@ class PerfisController extends Controller
         $perfi->analises_edt = $request->analises_edt;   
         $perfi->analises_del = $request->analises_del; 
 
+        $perfi->investigacoes_sociais = $request->investigacoes_sociais;   
+        $perfi->investigacoes_sociais_cad = $request->investigacoes_sociais_cad;   
+        $perfi->investigacoes_sociais_edt = $request->investigacoes_sociais_edt;   
+        $perfi->investigacoes_sociais_del = $request->investigacoes_sociais_del; 
+
         $perfi->organizacoes = $request->organizacoes;   
         $perfi->organizacoes_cad = $request->organizacoes_cad;   
         $perfi->organizacoes_edt = $request->organizacoes_edt;   
